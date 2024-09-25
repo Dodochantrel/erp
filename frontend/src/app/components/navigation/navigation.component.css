@@ -1,0 +1,101 @@
+.navigation{
+    width: 100vw;
+    max-width: 350px;
+    height: 100%;
+    background-color: var(--background-color);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 1000000000000000000;
+}
+
+.top{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    margin: 0;
+}
+
+.links{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.link{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: max-height 0.3s ease;
+}
+
+.active{
+    background-color: var(--second-background-color);
+}
+
+.link:hover{
+    background-color: var(--second-background-color);
+}
+
+.icon{
+    margin: .8rem .8rem;
+}
+
+.handler-icon{
+    transition: transform 0.3s ease;
+}
+
+.navigation-is-open{
+    transform: rotate(90deg);
+}
+
+.handler-icon{
+    margin-left: auto;
+    margin-right: .8rem;
+}
+
+.sub-icon{
+    margin-left: 2rem;
+}
+
+.profile {
+    margin-top: auto;
+    margin-bottom: 1rem;
+}
+
+.open-close{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.close {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: black;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}

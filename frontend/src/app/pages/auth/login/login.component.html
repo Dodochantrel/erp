@@ -1,0 +1,61 @@
+<div class="auth-pages">
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login">
+
+        <h2>Connexion</h2>
+
+        <div class="elementForm">
+            <label for="email">Email</label>
+            <div class="input">
+                <mat-icon aria-hidden="false" fontIcon="person"></mat-icon>
+                <input type="text" id="email" name="email" required formControlName="email">
+            </div>
+        </div>
+
+        <div class="elementForm">
+            <label for="password">Mot de passe</label>
+            <div class="input">
+                <mat-icon aria-hidden="false" fontIcon="lock"></mat-icon>
+                <input type="password" id="password" name="password" required formControlName="password">
+                @if (!passwordVisibility) {
+                    <mat-icon aria-hidden="false" fontIcon="visibility" (click)="handlerPassword()"></mat-icon>
+                } @else {
+                    <mat-icon aria-hidden="false" fontIcon="visibility_off" (click)="handlerPassword()"></mat-icon>
+                }
+            </div>
+        </div>
+
+        <a routerLink="/auth/forgot-password">Mot de passe oublié ?</a>
+
+        @if ((email.invalid && (email.dirty || email.touched)) || (password.invalid && (password.dirty || password.touched))) {
+            <div class="form-error">
+                @if(email.invalid && (email.dirty || email.touched)){
+                    <div>
+                        @if(email.errors?.['required']){
+                            <p>L'email est requis.</p>
+                        }
+                        @if(email.errors?.['email']){
+                            <p>L'email doit être valide.</p>
+                        }
+                    </div>
+                }
+
+                @if(password.invalid && (password.dirty || password.touched)){
+                    <div>
+                        @if(password.errors?.['required']){
+                            <p>Le mot de passe est requis.</p>
+                        }
+                    </div>
+                }
+            </div>
+        }
+
+        @if (this.isLoading){
+            <app-loader></app-loader>
+        } @else {
+            <app-button [color]="'green'" [text]="'Connexion'"></app-button>
+        }
+
+    </form>
+
+</div>

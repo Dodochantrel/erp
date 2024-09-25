@@ -1,0 +1,9 @@
+.validate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8rem 5rem;
+    box-shadow: var(--first-shadow);
+    flex-direction: column;
+    border-radius: 10px;
+}

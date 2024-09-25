@@ -1,0 +1,31 @@
+button{
+    color: white;
+    padding: .5rem 1rem;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform .6s;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+button:hover{
+    transform: scale(1.05);
+}
+
+.green{
+    background-color: var(--button-green-color);
+}
+
+.orange{
+    background-color: var(--button-orange-color);
+}
+
+.red{
+    background-color: var(--button-red-color);
+}
+
+.blue{
+    background-color: var(--button-blue-color);
+}

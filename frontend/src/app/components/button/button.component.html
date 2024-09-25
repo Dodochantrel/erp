@@ -1,0 +1,6 @@
+<button [className]="this.color" (click)='onClick()'>
+    @if(this.icon) {
+        <mat-icon aria-hidden="false" [fontIcon]="this.icon" class="icon"></mat-icon>
+    }
+    {{ this.text }}
+</button>

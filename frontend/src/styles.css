@@ -1,0 +1,60 @@
+@import url('../src/style/auth.css');
+@import url('../src/style/toastr.css');
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+/* You can add global styles to this file, and also import other style files */
+body{
+    margin: 0;
+
+    --background-color: #2c4761;
+    --second-background-color: #1f2d3d;
+
+    --body-background-color: #F5F6FA;
+    --border-color: #DDE4EB;
+
+    --first-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    --first-grey: #e5e5e5;
+    --second-grey: #8B8E98;
+
+    --grey-text: #525252;
+
+    --button-green-color: #8CD790;
+    --button-orange-color: #F9B34C;
+    --button-red-color: #bb2d3b;
+    --button-blue-color: #3B5998;
+
+    --first-success-color: #198754;
+    --second-success-color: #D1E7DD;
+    --third-success-color: #A3CFBB;
+
+    --first-error-color: #DC3545;
+    --second-error-color: #F8D7DA;
+    --third-error-color: #F1AEB5;
+
+    --favorite-color: #DB4B62;
+
+    --first-index: 100;
+    --second-index: 90;
+    --third-index: 80;
+}
+
+html, body { height: 100%; }
+
+body { 
+    margin: 0;
+    background-color: var(--body-background-color);
+}
+
+.button-without-style{
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.pages {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 2vh 2vw;
+    box-sizing: border-box;
+}

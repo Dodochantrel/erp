@@ -1,0 +1,96 @@
+.auth-pages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.auth-pages p{
+  margin: 0;
+}
+
+.auth-pages form{
+    width: 95%;
+    max-width: 500px;
+    box-shadow: var(--first-shadow);
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.auth-pages .login{
+  height: 350px;
+}
+
+.auth-pages .forgot-password{
+  height: 300px;
+}
+
+.auth-pages .register{
+  height: 600px;
+}
+
+.auth-pages .reset-password{
+  height: 350px;
+}
+
+.auth-pages .elementForm{
+    width: 80%;
+    min-height: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.auth-pages .input{
+    border: 1px solid var(--first-grey);
+    border-radius: 10px;
+    box-shadow: var(--first-shadow);
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+.auth-pages mat-icon{
+    width: 7%;
+    margin-left: 2%;
+}
+
+.auth-pages label{
+    color: var(--second-grey);
+}
+
+.auth-pages input{
+    border: none;
+    width: 88%;
+    height: 90%;
+    font-size: 1.2rem;
+}
+
+.auth-pages input:focus{
+    outline: none;
+}
+
+.auth-pages .input:focus-within{
+    outline: 2px solid black;
+}
+
+.auth-pages h2{
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.auth-pages .form-error{
+  width: calc(80% - 3rem);
+  background-color: var(--second-error-color);
+  padding: .5rem 1.5rem;
+  border: 3px solid var(--third-error-color);
+}
+
+.auth-pages .form-error p{
+  margin: 0;
+  color: var(--first-error-color);
+}
