@@ -11,5 +11,6 @@ export const mapFromDtoUpdateToEntity = (dto: UpdateCustomerDto): Customer => {
   customer.address = dto.address;
   customer.city = dto.city;
   customer.country = dto.country;
+  customer.zipCode = dto.zipCode;
   return customer;
 };

@@ -4,6 +4,7 @@ import { AppError } from 'src/error/app-error.exception';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { MailService } from 'src/mail/mail.service';
+import { User } from 'src/user/user.entity';
 
 export const SALTORROUNDS = 10;
 
@@ -63,12 +64,12 @@ export class AuthService {
     }
   }
 
-  createAccessToken(email: string) {
-    return this.jwtService.sign({ email: email }, { expiresIn: '7d' });
+  createAccessToken(email: string, role: string): string {
+    return this.jwtService.sign({ email: email, role: role }, { expiresIn: '7d' });
   }
 
-  createRefreshToken(email: string) {
-    return this.jwtService.sign({ email: email }, { expiresIn: '15m' });
+  createRefreshToken(email: string, role: string): string {
+    return this.jwtService.sign({ email: email, role: role }, { expiresIn: '15m' });
   }
 
   async forgotPassword(email: string) {
@@ -117,4 +118,5 @@ export class AuthService {
 export interface JwtPayload {
   email: string;
   role: string;
+  id: number;
 }

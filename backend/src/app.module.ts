@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { AdminModule } from './admin/admin.module';
 import { JwtStrategy } from './guards/jwt.strategy';
 import { CustomerModule } from './customer/customer.module';
+import { EventModule } from './event/event.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CustomerModule } from './customer/customer.module';
     ConfigModule.forRoot({ isGlobal: true }),
     AdminModule,
     CustomerModule,
+    EventModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

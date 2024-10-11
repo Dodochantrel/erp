@@ -34,8 +34,8 @@ export class AuthController {
   @Post('login')
   async login(@Body() loginQueryDto: LoginQueryDto, @Res() res: Response) {
     const user = await this.authService.login(loginQueryDto.email, loginQueryDto.password);
-    const accessToken = this.authService.createAccessToken(user.email);
-    const refreshToken = this.authService.createRefreshToken(user.email);
+    const accessToken = this.authService.createAccessToken(user.email, user.role);
+    const refreshToken = this.authService.createRefreshToken(user.email, user.role);
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
       secure: true,
@@ -54,7 +54,7 @@ export class AuthController {
     const accessToken = req.cookies['accessToken'];
     if (!accessToken) return res.status(401).json({ message: 'Access token not found' });
     const dataToken = await this.authService.decodeToken(accessToken);
-    const refreshToken = this.authService.createRefreshToken(dataToken.email);
+    const refreshToken = this.authService.createRefreshToken(dataToken.email, dataToken.role);
     res.cookie('refreshToken', refreshToken, {
       httpOnly: false,
       secure: true,

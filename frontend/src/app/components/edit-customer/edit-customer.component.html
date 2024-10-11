@@ -1,0 +1,60 @@
+<div class="pop-up-center">
+
+    <form [formGroup]="customerForm" class="form">
+
+        <h2>Modifier un client</h2>
+
+        <div class="row">
+
+            <p-floatLabel class="input">
+                <input pInputText id="lastName" formControlName="lastName" class="input"/>
+                <label for="lastName">Nom</label>
+            </p-floatLabel>
+
+            <p-floatLabel class="input">
+                <input pInputText id="firstName" formControlName="firstName" class="input"/>
+                <label for="firstName">Prénom</label>
+            </p-floatLabel>
+
+        </div>
+
+        <p-floatLabel class="input">
+            <input pInputText id="email" formControlName="email" class="input"/>
+            <label for="email">Email</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="input">
+            <input pInputText id="phoneNumber" formControlName="phoneNumber" class="input"/>
+            <label for="phoneNumber">Téléphone</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="input">
+            <input pInputText id="address" formControlName="address" class="input"/>
+            <label for="address" class="label">Adresse</label>
+        </p-floatLabel>
+
+        <div class="row">
+
+            <p-floatLabel class="input city">
+                <input pInputText id="city" formControlName="city" class="input"/>
+                <label for="city">Ville</label>
+            </p-floatLabel>
+
+            <p-floatLabel class="input zip-code">
+                <input pInputText id="zipCode" formControlName="zipCode" class="input"/>
+                <label for="zipCode">Code Postal</label>
+            </p-floatLabel>
+
+        </div>
+
+        <p-floatLabel class="input">
+            <input pInputText id="country" formControlName="country" class="input"/>
+            <label for="country">Pays</label>
+        </p-floatLabel>
+
+        <app-form-buttons class="buttons-form" (cancel)="customerService.handleIsEditCustomer()" (save)="save()"></app-form-buttons>
+    </form>
+
+</div>
+
+<div class="background-pop-up-center"></div>

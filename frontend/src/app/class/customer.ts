@@ -6,7 +6,7 @@ export class Customer {
     phoneNumber: string | null;
     address: string | null;
     city: string | null;
-    postalCode: string | null;
+    zipCode: string | null;
     country: string | null;
 
     constructor(id: number, firstName: string, lastName: string) {
@@ -17,7 +17,7 @@ export class Customer {
         this.phoneNumber = null;
         this.address = null;
         this.city = null;
-        this.postalCode = null;
+        this.zipCode = null;
         this.country = null;
     }
 }

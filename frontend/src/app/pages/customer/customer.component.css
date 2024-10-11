@@ -18,3 +18,36 @@
     box-sizing: border-box;
     border: 0.5px solid var(--border-color);
 }
+
+.actions-header {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.actions{
+    display: flex;
+    gap: .2rem;
+}
+
+.icon{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit{
+    color: var(--button-blue-color);
+}
+
+.delete{
+    color: var(--button-red-color);
+}
+
+.input-search {
+    padding: .5rem 1rem .5rem 2rem;
+    font-size: 1rem;
+}

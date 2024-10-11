@@ -1,0 +1,7 @@
+<p-paginator 
+    class="paginator"
+    (onPageChange)="onValueChange($event)" 
+    [first]="1"
+    [rows]="meta.limit" 
+    [totalRecords]="meta.itemCount" 
+    [rowsPerPageOptions]="rowsPerPageOptions" />

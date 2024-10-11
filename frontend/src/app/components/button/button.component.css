@@ -1,31 +1,43 @@
 button{
     color: white;
-    padding: .5rem 1rem;
+    padding: .3rem .8rem;
     border: none;
     font-size: 1.2rem;
     cursor: pointer;
     transition: transform .6s;
-    border-radius: 5px;
+    border-radius: 3px;
     display: flex;
     align-items: center;
-}
-
-button:hover{
-    transform: scale(1.05);
 }
 
 .green{
     background-color: var(--button-green-color);
 }
 
+.green:hover{
+    background-color: var(--button-hover-green-color);
+}
+
 .orange{
     background-color: var(--button-orange-color);
+}
+
+.orange:hover{
+    background-color: var(--button-hover-orange-color);
 }
 
 .red{
     background-color: var(--button-red-color);
 }
 
+.red:hover{
+    background-color: var(--button-hover-red-color);
+}
+
 .blue{
     background-color: var(--button-blue-color);
+}
+
+.blue:hover{
+    background-color: var(--button-hover-blue-color);
 }

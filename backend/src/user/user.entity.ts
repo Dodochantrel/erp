@@ -1,5 +1,6 @@
 import { Customer } from 'src/customer/customer.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, Relation } from 'typeorm';
+import { Event } from '../event/event.entity';
 
 @Entity()
 export class User {
@@ -38,4 +39,7 @@ export class User {
 
   @OneToMany(() => Customer, (customer) => customer.user)
   customers: Relation<Customer>[];
+
+  @OneToMany(() => Event, (event) => event.user)
+  events: Relation<Event>[];
 }

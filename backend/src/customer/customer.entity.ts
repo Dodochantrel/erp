@@ -1,5 +1,14 @@
 import { User } from 'src/user/user.entity';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Relation } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Relation,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Customer {
@@ -35,11 +44,22 @@ export class Customer {
   @Column({
     nullable: true,
   })
+  zipCode: string;
+
+  @Column({
+    nullable: true,
+  })
   country: string;
 
   @ManyToOne(() => User, (user) => user.customers)
   @JoinColumn()
   user: Relation<User>;
+
+  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
+  public createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)', onUpdate: 'CURRENT_TIMESTAMP(6)' })
+  public updatedAt: Date;
 
   constructor(firstName: string, lastName: string) {
     this.firstName = firstName;

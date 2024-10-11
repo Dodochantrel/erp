@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Customer } from '../customer.entity';
+import { PaginatedResponse } from 'src/pagination/paginated-response';
+import { PageQuery } from 'src/pagination/page-query';
 
 export class GetCustomerDto {
   @ApiProperty({
@@ -52,6 +54,13 @@ export class GetCustomerDto {
   city: string;
 
   @ApiProperty({
+    description: 'The zip code of the customer',
+    type: String,
+    example: '12345',
+  })
+  zipCode: string;
+
+  @ApiProperty({
     description: 'The country of the customer',
     type: String,
     example: 'USA',
@@ -69,5 +78,19 @@ export const mapFromEntityToDto = (entity: Customer): GetCustomerDto => {
   dto.address = entity.address;
   dto.city = entity.city;
   dto.country = entity.country;
+  dto.zipCode = entity.zipCode;
   return dto;
+};
+
+export const mapFromEntitiesPaginatedToDto = (
+  paginatedEntities: PaginatedResponse<Customer>,
+  pageQuery: PageQuery,
+): PaginatedResponse<GetCustomerDto> => {
+  const newPageQuery = new PageQuery(+pageQuery.page, +pageQuery.limit);
+  const paginatedDto = new PaginatedResponse<GetCustomerDto>(
+    paginatedEntities.data.map(mapFromEntityToDto),
+    newPageQuery,
+    paginatedEntities.meta.itemCount,
+  );
+  return paginatedDto;
 };

@@ -10,26 +10,72 @@
 
         <div class="table-container">
 
-            <p-table [columns]="colums" [value]="cutomers" [tableStyle]="{ 'min-width': '50rem' }">
-                <ng-template pTemplate="header" let-columns>
-                    <tr>
-                        <th *ngFor="let col of columns">
-                            {{ col.header }}
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-rowData let-columns="columns">
-                    <tr>
-                        <td *ngFor="let col of columns">
-                            {{ rowData[col.field] }}
-                        </td>
-                    </tr>
-                </ng-template>
-            </p-table>
-            
-        </div>
+            <div class="actions-header">
+                
+                <p-iconField iconPosition="left">
+                    <p-inputIcon styleClass="pi pi-search" />
+                    <input type="text" pInputText placeholder="Search" [formControl]="searchControl" class="input-search"/>
+                </p-iconField>
 
+                <app-button [text]='"Ajouté un client"' [color]='"blue"' (output)='handleAddCustomer()'></app-button>
+
+            </div>
+
+            @if(!isLoading) {
+
+                <p-table [value]="customers" styleClass=" p-datatable-striped p-datatable-sm"
+                    [tableStyle]="{ 'min-width': '50rem' }"
+                    [scrollable]="true" 
+                    scrollHeight="70vh" 
+                    [virtualScroll]="true"
+                    [virtualScrollItemSize]="46">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Tel.</th>
+                            <th>Adresse</th>
+                            <th>Ville</th>
+                            <th>Pays</th>
+                            <th>Actions</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr>
+                            <td>{{ customer.id }}</td>
+                            <td>{{ customer.lastName.toUpperCase() }} {{ customer.firstName }}</td>
+                            <td>{{ customer.email }}</td>
+                            <td>{{ customer.phoneNumber }}</td>
+                            <td>{{ customer.address }}</td>
+                            <td>{{ customer.city }}, {{ customer.zipCode }}</td>
+                            <td>{{ customer.country }}</td>
+                            <td class="actions">
+                                <mat-icon (click)="handleEditCustomer(customer)" class="icon edit">edit</mat-icon>
+                                <mat-icon (click)="deleteCustomer(customer)" class="icon delete">delete</mat-icon>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+            } @else {
+
+                <app-loader></app-loader>
+
+            }
+
+            <app-pagination [meta]="meta" (onChange)="onChangeMeta($event)"></app-pagination>
+
+        </div>
 
     </div>
 
 </div>
+
+@if(customerService.isEditCustomer) {
+    <app-edit-customer [customer]="selectedUser" (updatedCustomer)="updateCustomer($event)"></app-edit-customer>
+}
+
+@if(customerService.isAddCustomer) {
+    <app-add-customer (newCustomer)="addNewCustomer($event)"></app-add-customer>
+}

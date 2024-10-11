@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Customer } from '../class/customer';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TableService {
-
-  constructor() { }
+  constructor() {}
 
   getCutomersColumns(): Column[] {
     return [
-      { field: 'id', header: 'ID' },
+      { field: 'id', header: '#' },
       { field: 'name', header: 'Nom' },
       { field: 'email', header: 'Email' },
       { field: 'phoneNumber', header: 'Téléphone' },
       { field: 'address', header: 'Addresse' },
       { field: 'city', header: 'Ville' },
-      { field: 'country', header: 'Country' }
-    ]
+      { field: 'country', header: 'Country' },
+    ];
   }
 }
 

@@ -45,6 +45,13 @@ export class CreateCustomerDto {
   city: string;
 
   @ApiProperty({
+    description: 'The zip code of the customer',
+    type: String,
+    example: '12345',
+  })
+  zipCode: string;
+
+  @ApiProperty({
     description: 'The country of the customer',
     type: String,
     example: 'USA',
@@ -59,5 +66,6 @@ export const mapFromDtoToEntity = (dto: CreateCustomerDto): Customer => {
   customer.address = dto.address;
   customer.city = dto.city;
   customer.country = dto.country;
+  customer.zipCode = dto.zipCode;
   return customer;
 };
