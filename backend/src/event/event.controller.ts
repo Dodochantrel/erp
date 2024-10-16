@@ -2,9 +2,11 @@ import { Body, Controller, Delete, Get, Patch, Post, Query } from '@nestjs/commo
 import { EventService } from './event.service';
 import { CreateEventDto, mapFromDtoToEntity } from './dto/create-event.dto';
 import { UserEmail } from 'src/user/user-email.decorator';
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { EventDto, mapFromEntityToDto } from './dto/get-event.dto';
+import { CreateTypeEventDto, mapFromDtoToTypeEvent } from './dto/create-type-event.dto';
+import { TypeEventDto } from './dto/get-type-event.dto';
 
 @Controller('event')
 export class EventController {
@@ -12,7 +14,17 @@ export class EventController {
 
   @Post()
   async create(@Body() dto: CreateEventDto, @UserEmail() email: string): Promise<EventDto> {
-    return mapFromEntityToDto(await this.eventService.create(mapFromDtoToEntity(dto), email));
+    return mapFromEntityToDto(await this.eventService.create(mapFromDtoToEntity(dto), email, dto.typeId));
+  }
+
+  @Post('type')
+  async createType(@Body() dto: CreateTypeEventDto): Promise<TypeEventDto> {
+    return await this.eventService.createType(mapFromDtoToTypeEvent(dto));
+  }
+
+  @Get('type')
+  async findAllType(): Promise<TypeEventDto[]> {
+    return await this.eventService.findAllType();
   }
 
   @Get()
@@ -31,7 +43,7 @@ export class EventController {
 
   @Patch(':id')
   async update(@Body() dto: UpdateEventDto, @UserEmail() email: string, @Query('id') id: string): Promise<EventDto> {
-    return mapFromEntityToDto(await this.eventService.update(+id, mapFromDtoToEntity(dto), email));
+    return mapFromEntityToDto(await this.eventService.update(+id, mapFromDtoToEntity(dto), email, dto.typeId));
   }
 
   @Delete(':id')

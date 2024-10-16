@@ -4,18 +4,26 @@ import { LessThan, MoreThan, Repository } from 'typeorm';
 import { UserService } from 'src/user/user.service';
 import { AppError } from 'src/error/app-error.exception';
 import { Dayjs } from 'dayjs';
+import { TypeEvent } from './type-event.entity';
 
 @Injectable()
 export class EventService {
   constructor(
     @Inject('EVENT_REPOSITORY')
     private eventRepository: Repository<Event>,
+    @Inject('TYPE_EVENT_REPOSITORY')
+    private typeEventRepository: Repository<TypeEvent>,
     private readonly userService: UserService,
   ) {}
 
-  async create(event: Event, email: string): Promise<Event> {
+  async create(event: Event, email: string, typeId: number): Promise<Event> {
     event.user = await this.userService.findByEmail(email);
+    event.type = await this.typeEventRepository.findOne({ where: { id: typeId } });
     return this.eventRepository.save(event);
+  }
+
+  async createType(type: TypeEvent): Promise<TypeEvent> {
+    return this.typeEventRepository.save(type);
   }
 
   async findAll(email: string, start: Dayjs, end: Dayjs): Promise<Event[]> {
@@ -28,17 +36,23 @@ export class EventService {
         start: MoreThan(start),
         end: LessThan(end),
       },
+      relations: ['type'],
     });
   }
 
+  async findAllType(): Promise<TypeEvent[]> {
+    return this.typeEventRepository.find();
+  }
+
   async findOne(id: number, email: string): Promise<Event> {
-    const event = await this.eventRepository.findOne({ where: { id }, relations: ['user'] });
+    const event = await this.eventRepository.findOne({ where: { id }, relations: ['user', 'type'] });
     this.checkIfAuthorized(event, email);
     return event;
   }
 
-  async update(id: number, event: Event, email: string): Promise<Event> {
+  async update(id: number, event: Event, email: string, typeId: number): Promise<Event> {
     const existingEvent = await this.findOne(id, email);
+    event.type = await this.typeEventRepository.findOne({ where: { id: typeId } });
     return this.eventRepository.save({ ...existingEvent, ...event });
   }
 

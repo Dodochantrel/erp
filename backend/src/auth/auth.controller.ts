@@ -37,12 +37,12 @@ export class AuthController {
     const accessToken = this.authService.createAccessToken(user.email, user.role);
     const refreshToken = this.authService.createRefreshToken(user.email, user.role);
     res.cookie('accessToken', accessToken, {
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
       sameSite: 'strict',
     });
     res.cookie('refreshToken', refreshToken, {
-      httpOnly: false,
+      httpOnly: true,
       secure: true,
       sameSite: 'strict',
     });

@@ -10,6 +10,7 @@ import { CalendarComponent } from './pages/calendar/calendar.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { QuoteComponent } from './pages/quote/quote.component';
 import { CustomerComponent } from './pages/customer/customer.component';
+import { InformationComponent } from './pages/information/information.component';
 
 export const routes: Routes = [
     {
@@ -55,6 +56,11 @@ export const routes: Routes = [
     {
         path: 'customer',
         component: CustomerComponent,
+        canActivate: [authGuard],
+    },
+    {
+        path: 'information',
+        component: InformationComponent,
         canActivate: [authGuard],
     }
 ];

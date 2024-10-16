@@ -8,7 +8,11 @@ import { provideToastr } from 'ngx-toastr';
 import { tokenInterceptor } from './interceptors/token.interceptor';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/moment';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeFr);
 
 export const appConfig: ApplicationConfig = {
   providers: [

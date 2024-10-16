@@ -14,13 +14,33 @@ import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { addMonths, subMonths } from 'date-fns';
 import { Event } from '../../class/event';
 import dayjs from 'dayjs';
+import weekOfYear from 'dayjs/plugin/weekOfYear'; // Importer le plugin
+import { CalendarModule as PrimeCalendarModule } from 'primeng/calendar';
+import { InputTextModule } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddEventComponent } from '../../components/add-event/add-event.component';
 
 const SECOND_COLOR_FOR_EVENT = '#D7D7D7';
+
+dayjs.extend(weekOfYear); // Activer le plugin
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [NavigationComponent, ButtonComponent, CalendarModule],
+  imports: [
+    NavigationComponent,
+    ButtonComponent,
+    CalendarModule,
+    PrimeCalendarModule,
+    InputTextModule,
+    IconFieldModule,
+    InputIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AddEventComponent,
+  ],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css',
   providers: [
@@ -33,6 +53,8 @@ const SECOND_COLOR_FOR_EVENT = '#D7D7D7';
 export class CalendarComponent {
   view: CalendarView = CalendarView.Month;
   viewDate: Date = new Date();
+  public searchControl: FormControl = new FormControl();
+  public dateControl: FormControl = new FormControl();
 
   events: CalendarEvent[] = [];
 
@@ -41,28 +63,24 @@ export class CalendarComponent {
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
   weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
   public isOpenAddEvent: boolean = false;
+  public weekNumber: number = 0;
 
   constructor(
-    private readonly eventService: EventService,
+    readonly eventService: EventService,
     private readonly notificationService: NotificationService
   ) {}
 
-  public handlerIsOneAddEvent() {
-    this.isOpenAddEvent = !this.isOpenAddEvent;
-  }
-
-  // Méthode pour passer au mois suivant
   nextMonth(): void {
     this.viewDate = addMonths(this.viewDate, 1);
   }
 
-  // Méthode pour revenir au mois précédent
   previousMonth(): void {
     this.viewDate = subMonths(this.viewDate, 1);
   }
 
   ngOnInit() {
     this.getEvents();
+    this.calculateWeekNumber();
   }
 
   getEvents() {
@@ -95,7 +113,7 @@ export class CalendarComponent {
       end: new Date(event.end.toString()),
       title: event.title,
       color: {
-        primary: event.color ? event.color : SECOND_COLOR_FOR_EVENT,
+        primary: SECOND_COLOR_FOR_EVENT,
         secondary: SECOND_COLOR_FOR_EVENT,
       },
     };
@@ -103,5 +121,13 @@ export class CalendarComponent {
 
   addEvent(event: Event) {
     this.events.push(this.mapFromEventToCalendarEvent(event));
+  }
+
+  calculateWeekNumber() {
+    this.weekNumber = dayjs(this.viewDate).week();
+  }
+
+  goToToday() {
+    this.viewDate = new Date();
   }
 }

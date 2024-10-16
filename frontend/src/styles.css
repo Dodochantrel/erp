@@ -62,10 +62,22 @@ body {
 }
 
 .pages {
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     padding: 2vh 2vw;
     box-sizing: border-box;
+}
+
+.header{
+    width: 100%;
+    background-color: white;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+    border: 0.5px solid var(--border-color);
+}
+
+.title{
+    margin: 0 !important;
 }
 
 .pop-up-center {
@@ -93,4 +105,19 @@ body {
 
 .buttons-form{
     width: 100%;
+}
+
+.date-picker input{
+    padding: .5rem .5rem .5rem .5rem;
+    font-size: 1rem;
+}
+
+.select .p-dropdown{
+    width: 100%;
+}
+
+.p-inputmask {
+    width: 100%;
+    padding: 0.5rem;
+    padding-left: 2.2rem;
 }

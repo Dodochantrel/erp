@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Event } from './../event.entity';
+import { TypeEventDto } from './get-type-event.dto';
 
 export class EventDto {
   @ApiProperty({
@@ -40,12 +41,9 @@ export class EventDto {
 
   @ApiProperty({
     description: 'Type of the event',
-    type: String,
-    example: 'meeting',
-    enum: ['work', 'meeting', 'other'],
-    default: 'other',
+    type: TypeEventDto,
   })
-  type: string;
+  type: TypeEventDto;
 }
 
 export const mapFromEntityToDto = (dto: Event): EventDto => {

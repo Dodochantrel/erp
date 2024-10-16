@@ -23,8 +23,8 @@ export function tokenInterceptor(
   const cookieService = inject(CookieService);
   const authService = inject(AuthService);
   const router = inject(Router);
-  const refreshToken = cookieService.getCookie('refreshToken');
-  const tokenInHeader = `Bearer ${refreshToken}`;
+  const accessToken = cookieService.getCookie('accessToken');
+  const tokenInHeader = `Bearer ${accessToken}`;
   const reqWithHeader = req.clone({
     headers: req.headers.set(TOKEN_HEADER_KEY, tokenInHeader),
   });
@@ -35,9 +35,9 @@ export function tokenInterceptor(
           .refresh()
           .pipe(
             switchMap(() => {
-              const refreshToken =
-                cookieService.getCookie('refreshToken');
-              const tokenInHeader = `Bearer ${refreshToken}`;
+              const accessToken =
+                cookieService.getCookie('accessToken');
+              const tokenInHeader = `Bearer ${accessToken}`;
               const reqWithHeader = req.clone({
                 headers: req.headers.set(TOKEN_HEADER_KEY, tokenInHeader),
               });

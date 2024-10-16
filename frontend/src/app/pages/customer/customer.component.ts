@@ -59,20 +59,23 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCustomers(this.meta.page, this.meta.limit);
+    this.search();    
+  }
 
+  search() {
     // Écouter les changements de valeur de l'input de recherche
     this.searchControl.valueChanges
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged()
-      )
-      .subscribe((searchTerm: string) => {
-        if (searchTerm === '') {
-          this.getCustomers(this.meta.page, this.meta.limit, null);
-        } else {
-          this.getCustomers(this.meta.page, this.meta.limit, searchTerm);
-        }
-      });
+    .pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    )
+    .subscribe((searchTerm: string) => {
+      if (searchTerm === '') {
+        this.getCustomers(this.meta.page, this.meta.limit, null);
+      } else {
+        this.getCustomers(this.meta.page, this.meta.limit, searchTerm);
+      }
+    });
   }
 
   getCustomers(page: number, limit: number, search: string | null = null): void {

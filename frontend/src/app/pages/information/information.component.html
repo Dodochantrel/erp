@@ -1,0 +1,112 @@
+<app-navigation></app-navigation>
+
+<div class="pages">
+
+    <div class="header">
+        <h2 class="title">Mes informations</h2>
+    </div>
+
+    <form class="container" [formGroup]="informationForm">
+
+        <div class="left">
+
+            <div class="input-container">
+                <label for="companyName" class="label">Nom d'entreprise</label>
+                <p-iconField iconPosition="left">
+                    <p-inputIcon styleClass="pi pi-briefcase" />
+                    <input type="text" pInputText placeholder="Nom d'entreprise" class="input" formControlName="companyName" />
+                </p-iconField>
+            </div>
+
+            <div class="input-container">
+                <label for="siret" class="label">Le siret</label>
+                <p-iconField iconPosition="left">
+                    <p-inputIcon styleClass="pi pi-building-columns" />
+                    <p-inputMask 
+                        mask="999-999-999 99999" 
+                        formControlName="value" 
+                        placeholder="XXX-XXX-XXX XXXXX" formControlName="siret" />
+                </p-iconField>
+                
+            </div>
+
+            <div class="row">
+
+                <div class="input-container">
+                    <label for="lastName" class="label">Mon nom</label>
+                    <p-iconField iconPosition="left">
+                        <p-inputIcon styleClass="pi pi-user" />
+                        <input type="text" pInputText placeholder="Nom" class="input" formControlName="lastName" />
+                    </p-iconField>
+                </div>
+
+                <div class="input-container">
+                    <label for="firstName" class="label">Mon prénom</label>
+                    <p-iconField iconPosition="left">
+                        <p-inputIcon styleClass="pi pi-user" />
+                        <input type="text" pInputText placeholder="Prénom" class="input" formControlName="firstName" />
+                    </p-iconField>
+                </div>
+
+            </div>
+
+            <div class="input-container">
+                <label for="email" class="label">Mon email</label>
+                <p-iconField iconPosition="left">
+                    <p-inputIcon styleClass="pi pi-envelope" />
+                    <input type="text" pInputText placeholder="Email" class="input" formControlName="email" />
+                </p-iconField>
+            </div>
+
+            <div class="input-container">
+                <label for="phoneNumber" class="label">Mon numéro de téléphone</label>
+                <p-iconField iconPosition="left">
+                    <p-inputIcon styleClass="pi pi-phone" />
+                    <input type="text" pInputText placeholder="Numéro" class="input" formControlName="phoneNumber" />
+                </p-iconField>
+            </div>
+
+            <div class="input-container">
+                <label for="address" class="label">Mon adresse</label>
+                <p-iconField iconPosition="left">
+                    <p-inputIcon styleClass="pi pi-home" />
+                    <input type="text" pInputText placeholder="Adresse" class="input" formControlName="address" />
+                </p-iconField>
+            </div>
+
+            <div class="row">
+
+                <div class="input-container city">
+                    <label for="city" class="label">Ma ville</label>
+                    <p-iconField iconPosition="left">
+                        <p-inputIcon styleClass="pi pi-search" />
+                        <input type="text" pInputText placeholder="Ville" class="input" formControlName="city" />
+                    </p-iconField>
+                </div>
+    
+                <div class="input-container postal-code">
+                    <label for="zipCode" class="label">Mon code postal</label>
+                    <p-iconField iconPosition="left">
+                        <p-inputIcon styleClass="pi pi-compass" />
+                        <p-inputMask 
+                            mask="99999" 
+                            formControlName="value" 
+                            placeholder="XXXXX" formControlName="zipCode" />
+                    </p-iconField>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="right">
+
+            <app-upload-file></app-upload-file>
+
+            <app-form-buttons class="buttons-form" (cancel)="cancel()" (save)="save()"></app-form-buttons>
+
+        </div>
+
+    </form>
+    
+</div>

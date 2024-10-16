@@ -12,7 +12,7 @@ import { NavigationProfileComponent } from '../navigation-profile/navigation-pro
   styleUrl: './navigation.component.css'
 })
 export class NavigationComponent {  
-  public isOpenNaviation: boolean = true;
+  public isOpenNaviation: boolean = false;
 
 
   public navigationItems: NavigationItem[] = [
@@ -21,6 +21,7 @@ export class NavigationComponent {
     { name: 'Devis', icon: 'description', path: '/quote' },
     { name: 'Factures', icon: 'receipt', path: '/invoice' },
     { name: 'Clients', icon: 'people', path: '/customer' },
+    { name: 'Mes informations', icon: 'receipt_long', path: '/information' },
   ];   
   
   public toggleSubNavigation(navigationItem: NavigationItem): void {

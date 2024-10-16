@@ -1,0 +1,16 @@
+<div class="container">
+    @if(selectedFile) {
+        <div class="container-preview">
+            <img [src]="selectedFile" alt="Prévisualisation de l'image" class="image-preview" />
+        </div>
+    } @else {
+        <div class="folder">
+            <div class="top"></div>
+            <div class="bottom"></div>
+        </div>
+    }
+    <label class="custom-file-upload">
+      <input class="title" type="file" (change)="onSelectFile($event)" accept="image/*" />
+      Choisir un fichier
+    </label>
+  </div>

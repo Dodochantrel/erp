@@ -10,23 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Dayjs } from 'dayjs';
-
-export enum TypeEvent {
-  WORK = 'work',
-  MEETING = 'meeting',
-  OTHER = 'other',
-}
-
-export const fromStringToTypeEvent = (type: string): TypeEvent => {
-  switch (type) {
-    case 'work':
-      return TypeEvent.WORK;
-    case 'meeting':
-      return TypeEvent.MEETING;
-    default:
-      return TypeEvent.OTHER;
-  }
-};
+import { TypeEvent } from './type-event.entity';
 
 @Entity()
 export class Event {
@@ -49,12 +33,9 @@ export class Event {
   @Column({ nullable: true })
   description: string;
 
-  @Column({
-    type: 'enum',
-    enum: TypeEvent,
-    default: TypeEvent.OTHER,
-  })
-  type: TypeEvent;
+  @ManyToOne(() => TypeEvent, (typeEvent) => typeEvent.events)
+  @JoinColumn()
+  type: Relation<TypeEvent>;
 
   @ManyToOne(() => User, (user) => user.events)
   @JoinColumn()

@@ -13,7 +13,7 @@ export class AuthService {
   baseUrl = 'http://localhost:3000/auth';
 
   isAuth(): boolean {
-    const refreshToken = this.cookieService.getCookie('refreshToken');
+    const refreshToken = this.cookieService.getCookie('accessToken');
     return refreshToken ? true : false;
   }
 

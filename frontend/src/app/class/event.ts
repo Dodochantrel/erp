@@ -3,7 +3,6 @@ import { Dayjs } from 'dayjs';
 export class Event {
   id: number;
   title: string;
-  color: string | null;
   start: Dayjs;
   end: Dayjs;
   description: string | null;
@@ -14,12 +13,10 @@ export class Event {
     title: string,
     start: Dayjs,
     end: Dayjs,
-    description: string,
     type: TypeEvent
   ) {
     this.id = id;
     this.title = title;
-    this.color = null;
     this.start = start;
     this.end = end;
     this.description = null;
@@ -27,19 +24,14 @@ export class Event {
   }
 }
 
-export enum TypeEvent {
-  WORK = 'work',
-  MEETING = 'meeting',
-  OTHER = 'other',
-}
+export class TypeEvent {
+  id: number;
+  name: string;
+  color: string;
 
-export const fromStringToTypeEvent = (type: string): TypeEvent => {
-  switch (type) {
-    case 'work':
-      return TypeEvent.WORK;
-    case 'meeting':
-      return TypeEvent.MEETING;
-    default:
-      return TypeEvent.OTHER;
+  constructor(id: number, name: string, color: string) {
+    this.id = id;
+    this.name = name;
+    this.color = color;
   }
-};
+}

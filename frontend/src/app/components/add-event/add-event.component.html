@@ -1,0 +1,78 @@
+<div class="pop-up-center">
+
+    <form [formGroup]="eventForm" class="form">
+
+        <h2>Ajouter un Évènement</h2>
+
+        <p-floatLabel class="input">
+            <input pInputText id="title" formControlName="title" class="input"/>
+            <label for="title">Titre</label>
+        </p-floatLabel>
+
+        <div class="row">
+
+            <p-dropdown 
+                class="select input"
+                [options]="types" 
+                formControlName="type"
+                optionLabel="name" 
+                placeholder="Sélectionner une catégorie" />
+
+            <button class="button-add-type">
+                <mat-icon aria-hidden="false" fontIcon="add" class="icon"></mat-icon>
+            </button>
+
+        </div>
+
+        <div class="row">
+
+            <p-calendar 
+                class="input"
+                placeholder="Date de début"
+                formControlName="startDate"
+                [iconDisplay]="'input'" 
+                [showIcon]="true" 
+                inputId="icondisplay" />
+
+            <p-calendar 
+                class="input"
+                placeholder="Heure de début"
+                formControlName="startHour"
+                inputId="calendar-timeonly" 
+                [timeOnly]="true" />
+
+        </div>
+
+        <div class="row">
+
+            <p-calendar 
+                class="input"
+                placeholder="Date de fin"
+                formControlName="endDate"
+                [iconDisplay]="'input'" 
+                [showIcon]="true" 
+                inputId="icondisplay" />
+
+            <p-calendar 
+                class="input"
+                placeholder="Heure de fin"
+                formControlName="endHour"
+                inputId="calendar-timeonly" 
+                [timeOnly]="true" />
+
+        </div>
+
+        <textarea 
+            class="input"
+            formControlName="description"
+            rows="5"
+            cols="30" 
+            pInputTextarea >
+        </textarea>
+
+        <app-form-buttons class="buttons-form" (cancel)="eventService.handleIsAddEvent()" (save)="save()"></app-form-buttons>
+    </form>
+
+</div>
+
+<div class="background-pop-up-center"></div>
