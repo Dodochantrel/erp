@@ -17,6 +17,7 @@ import { Event } from '../../class/event';
 import { TabViewModule } from 'primeng/tabview';
 import { CalendarModule as PrimeCalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
+import { CookieService } from '../../services/cookie.service';
 
 const SECOND_COLOR_FOR_EVENT = '#D7D7D7';
 
@@ -49,12 +50,15 @@ export class CalendarViewComponent {
   public weekNumber: number = 0;
   public clickedDate: Date | null = null;
 
-  public startHour: Date = new Date(new Date().setHours(0, 0, 0, 0));
-  public endHour: Date = new Date(new Date().setHours(23, 59, 0, 0));
+  public startHour: Date = new Date(new Date().setHours(7, 0, 0, 0));
+  public endHour: Date = new Date(new Date().setHours(19, 0, 0, 0));
+  public startHourNumber: number = 7;
+  public endHourNumber: number = 19;
 
   constructor(
     readonly eventService: EventService,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly cookieService: CookieService
   ) {}
 
   nextMonth(): void {
@@ -68,6 +72,7 @@ export class CalendarViewComponent {
   ngOnInit() {
     this.getEvents();
     this.calculateWeekNumber();
+    this.getOpenHour();
   }
 
   getEvents() {
@@ -116,5 +121,19 @@ export class CalendarViewComponent {
 
   goToToday() {
     this.viewDate = new Date();
+  }
+
+  changeHours() {
+    this.startHourNumber = this.startHour.getHours();
+    this.endHourNumber = this.endHour.getHours();
+    this.cookieService.setCookie('startHour', this.startHourNumber.toString());
+    this.cookieService.setCookie('endHour', this.endHourNumber.toString());
+  }
+
+  getOpenHour() {
+    this.startHourNumber = +this.cookieService.getCookie('startHour');
+    this.endHourNumber = +this.cookieService.getCookie('endHour');
+    this.startHour = new Date(new Date().setHours(this.startHourNumber, 0, 0, 0));
+    this.endHour = new Date(new Date().setHours(this.endHourNumber, 0, 0, 0));
   }
 }

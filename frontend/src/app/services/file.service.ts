@@ -16,14 +16,7 @@ export class FileService {
     });
   }
 
-  decodeFile(data: string): Blob {
-    const byteString = atob(data.split(',')[1]);
-    const mimeString = data.split(',')[0].split(':')[1].split(';')[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ab], { type: mimeString });
+  decodeFile(base64: string = ''): string {
+    return `data:image/png;base64,${base64}`;
   }
 }

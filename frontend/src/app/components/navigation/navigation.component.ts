@@ -12,7 +12,7 @@ import { NavigationProfileComponent } from '../navigation-profile/navigation-pro
   styleUrl: './navigation.component.css'
 })
 export class NavigationComponent {  
-  public isOpenNaviation: boolean = false;
+  public isOpenNaviation: boolean = true;
 
 
   public navigationItems: NavigationItem[] = [

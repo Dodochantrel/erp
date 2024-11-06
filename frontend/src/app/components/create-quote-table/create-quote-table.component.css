@@ -1,0 +1,57 @@
+.create-quote-table {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-collapse: collapse;
+    position: relative;
+}
+
+.header-element,
+.body-element {
+    border: 1px solid var(--border-color);
+    padding: 2% 2%;
+    box-sizing: border-box;
+}
+
+.header-element {
+    background-color: var(--button-blue-color);
+    color: white;
+}
+
+.body-element {
+    text-align: center;
+}
+
+.body-element.description {
+    width: 60%;
+    text-align: left;
+}
+
+.quantity {
+    width: 20%;
+}
+
+.price {
+    width: 20%;
+}
+
+.add-quote-line {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    border-radius: 100%;
+    background-color: var(--button-green-color);
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    color: white;
+    cursor: pointer;
+    transition: transform .6s;
+}
+
+.add-quote-line:hover {
+    transform: scale(1.1);
+}

@@ -10,16 +10,17 @@
     padding: 1rem 0;
 }
 
-.hour-controller{
+.hour-controller {
+    margin-top: .5rem;
     display: flex;
     align-items: center;
     gap: .4rem;
 }
 
-:host ::ng-deep .p-inputwrapper{
+:host ::ng-deep .p-inputwrapper {
     width: 90px;
 }
 
-:host ::ng-deep .p-inputtext{
+:host ::ng-deep .p-inputtext {
     padding: .5rem .8rem .5rem .7rem;
 }

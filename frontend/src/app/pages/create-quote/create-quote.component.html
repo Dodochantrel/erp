@@ -1,0 +1,34 @@
+@if(isLoading) {
+
+    <p>Chargement</p>
+
+} @else {
+
+    <div class="quote">
+
+        <div class="first-line">
+            <img [src]="decodeFile(user.company!.logoEncodedBase64)" alt="Logo" class="logo" />
+            <p class="quote-number">Devis n°</p>
+        </div>
+    
+        <div class="second-line user">
+            <p class="name">{{ user.company?.name }}</p>
+            <p class="address">{{ user.company?.address }}</p>
+            <p class="city">{{ user.company?.city }}, {{ user.company?.postalCode }}</p>
+            <p class="siret">SIRET : {{ user.company?.siret }}</p>
+            <p class="phone">Tél: : {{ user.phone }}</p>
+        </div>
+
+        <div class="third-line customer">
+            <p class="name">Nom</p>
+            <p class="address">Adresse</p>
+            <p class="city">Ville, code Postal</p>
+            <p class="siret">SIRET : </p>
+            <p class="phone">Tél : </p>
+        </div>
+        
+        <app-create-quote-table></app-create-quote-table>
+    
+    </div>
+
+}

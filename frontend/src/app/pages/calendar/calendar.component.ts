@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavigationComponent } from '../../components/navigation/navigation.component';
 import { ButtonComponent } from '../../components/button/button.component';
 import { EventService } from '../../services/event.service';
 import { NotificationService } from '../../services/notification.service';
@@ -15,7 +14,6 @@ import { CalendarViewComponent } from '../../components/calendar-view/calendar-v
   selector: 'app-calendar',
   standalone: true,
   imports: [
-    NavigationComponent,
     ButtonComponent,
     PrimeCalendarModule,
     InputTextModule,

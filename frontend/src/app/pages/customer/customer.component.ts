@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationComponent } from '../../components/navigation/navigation.component';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { Customer } from '../../class/customer';
@@ -23,7 +22,6 @@ import { EditCustomerComponent } from '../../components/edit-customer/edit-custo
   selector: 'app-customer',
   standalone: true,
   imports: [
-    NavigationComponent,
     TableModule,
     CommonModule,
     ButtonComponent,

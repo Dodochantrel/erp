@@ -1,0 +1,26 @@
+<table class="create-quote-table">
+
+  <thead>
+
+    <tr>
+      <th class="header-element description">Description</th>
+      <th class="header-element quantity">Quantité</th>
+      <th class="header-element price">Prix unitaire</th>
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <tr class="body">
+      @for(quoteLine of quoteLines; track quoteLine.id) {
+        <td class="body-element description">Description</td>
+        <td class="body-element quantity">Quantité</td>
+        <td class="body-element price">Prix unitaire</td>
+      }
+    </tr>
+
+  </tbody>
+
+  <a class="add-quote-line">+</a>
+</table>

@@ -1,36 +1,42 @@
 @if (isOpenNaviation) {
     <div class="navigation">
-        <mat-icon aria-hidden="false" fontIcon="chevron_left" class="handler-icon" class='open-close' (click)='toggleNavigation()'></mat-icon>
-        
-        <div class="top">
-            <h2 class="title">ERP BTP</h2>
-        </div>
 
-        <div class="links">
-            @for (navigationItem of navigationItems; track $index) {
-                @if(navigationItem.subNavigationItems){
-                    <a class="link" [routerLinkActive]="['active']" (click)="toggleSubNavigation(navigationItem)">
-                        <mat-icon aria-hidden="false" [fontIcon]="navigationItem.icon" class="icon"></mat-icon>
-                        {{ navigationItem.name }}
-                        <mat-icon aria-hidden="false" fontIcon="chevron_right" class="handler-icon" [class.navigation-is-open]="navigationItem.isOpen"></mat-icon>
-                    </a>
-                    @if (navigationItem.isOpen){
-                        @for (subNavigationItem of navigationItem.subNavigationItems; track $index) {
-                            <a class="link" [routerLink]="subNavigationItem.path" [routerLinkActive]="['active']">
-                                <mat-icon aria-hidden="false" [fontIcon]="subNavigationItem.icon" class="icon sub-icon"></mat-icon>
-                                {{ subNavigationItem.name }}
-                            </a>
-                        }
-                    }    
-                } @else {
-                    <a class="link" [routerLink]="navigationItem.path" [routerLinkActive]="['active']">
-                        <mat-icon aria-hidden="false" [fontIcon]="navigationItem.icon" class="icon"></mat-icon>
-                        {{ navigationItem.name }}
-                    </a>
+        <div class="fixed">
+
+            <mat-icon aria-hidden="false" fontIcon="chevron_left" class="handler-icon" class='open-close' (click)='toggleNavigation()'></mat-icon>
+        
+            <div class="top">
+                <h2 class="title">ERP BTP</h2>
+            </div>
+
+            <div class="links">
+                @for (navigationItem of navigationItems; track $index) {
+                    @if(navigationItem.subNavigationItems){
+                        <a class="link" [routerLinkActive]="['active']" (click)="toggleSubNavigation(navigationItem)">
+                            <mat-icon aria-hidden="false" [fontIcon]="navigationItem.icon" class="icon"></mat-icon>
+                            {{ navigationItem.name }}
+                            <mat-icon aria-hidden="false" fontIcon="chevron_right" class="handler-icon" [class.navigation-is-open]="navigationItem.isOpen"></mat-icon>
+                        </a>
+                        @if (navigationItem.isOpen){
+                            @for (subNavigationItem of navigationItem.subNavigationItems; track $index) {
+                                <a class="link" [routerLink]="subNavigationItem.path" [routerLinkActive]="['active']">
+                                    <mat-icon aria-hidden="false" [fontIcon]="subNavigationItem.icon" class="icon sub-icon"></mat-icon>
+                                    {{ subNavigationItem.name }}
+                                </a>
+                            }
+                        }    
+                    } @else {
+                        <a class="link" [routerLink]="navigationItem.path" [routerLinkActive]="['active']">
+                            <mat-icon aria-hidden="false" [fontIcon]="navigationItem.icon" class="icon"></mat-icon>
+                            {{ navigationItem.name }}
+                        </a>
+                    }
                 }
-            }
+            </div>
+            <app-navigation-profile class="profile"></app-navigation-profile>  
+
         </div>
-        <app-navigation-profile class="profile"></app-navigation-profile>    
+          
     </div>
 } @else {
     <mat-icon aria-hidden="false" fontIcon="chevron_right" class="handler-icon" class='close' (click)='toggleNavigation()'></mat-icon>

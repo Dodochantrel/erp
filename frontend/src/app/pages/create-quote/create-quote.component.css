@@ -1,0 +1,35 @@
+.quote {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.5%;
+    box-shadow: var(--first-shadow);
+    border: 0.5px solid var(--border-color);
+}
+
+.first-line {
+    width: 100%;
+    background-color: green;
+}
+
+.logo {
+    width: 20%;
+    aspect-ratio: 1 1;
+    object-fit: cover;
+}
+
+.first-line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.second-line {
+    width: 100%;
+    background-color: red;
+}
+
+.third-line {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}

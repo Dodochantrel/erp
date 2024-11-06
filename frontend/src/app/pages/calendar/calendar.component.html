@@ -1,36 +1,30 @@
-<app-navigation></app-navigation>
-
-<div class="pages">
-
-    <div class="header">
-      <h2 class="title">Liste de vos chantier et Rendez-vous</h2>
-    </div>
-      
-    <div class="container">
-
-      <div class="header-container">
-
-        <p-iconField iconPosition="left">
-          <p-inputIcon styleClass="pi pi-search" />
-          <input type="text" pInputText placeholder="Search" [formControl]="searchControl" class="input-search" class="input"/>
-        </p-iconField>
-
-        <p-calendar 
-          [iconDisplay]="'input'" 
-          [showIcon]="true" 
-          inputId="icondisplay"
-          [formControl]="dateControl"
-          class="date-picker" />
-
-        <app-button [text]="'Ajouté un Évènement'" [color]="'blue'" (output)="eventService.handleIsAddEvent()"></app-button>
-
-      </div>
-
-      <app-calendar-view></app-calendar-view>
-
-    </div>    
-
+<div class="header">
+  <h2 class="title">Liste de vos chantier et Rendez-vous</h2>
 </div>
+  
+<div class="container">
+  
+  <div class="header-container">
+
+    <p-iconField iconPosition="left">
+      <p-inputIcon styleClass="pi pi-search" />
+      <input type="text" pInputText placeholder="Search" [formControl]="searchControl" class="input-search" class="input"/>
+    </p-iconField>
+
+    <p-calendar 
+      [iconDisplay]="'input'" 
+      [showIcon]="true" 
+      inputId="icondisplay"
+      [formControl]="dateControl"
+      class="date-picker" />
+
+    <app-button [text]="'Ajouté un Évènement'" [color]="'blue'" (output)="eventService.handleIsAddEvent()"></app-button>
+
+  </div>
+
+  <app-calendar-view></app-calendar-view>
+
+</div>    
 
 @if (eventService.isAddEvent) {
   <app-add-event></app-add-event>

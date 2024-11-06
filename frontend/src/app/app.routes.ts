@@ -11,6 +11,8 @@ import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { QuoteComponent } from './pages/quote/quote.component';
 import { CustomerComponent } from './pages/customer/customer.component';
 import { InformationComponent } from './pages/information/information.component';
+import { ViewWithNavigationComponent } from './layouts/view-with-navigation/view-with-navigation.component';
+import { CreateQuoteComponent } from './pages/create-quote/create-quote.component';
 
 export const routes: Routes = [
     {
@@ -34,33 +36,38 @@ export const routes: Routes = [
         component: ResetPasswordComponent,
     },
     {
-        path: 'auth/me',
-        component: MeComponent,
+        path: '',
+        component: ViewWithNavigationComponent,
         canActivate: [authGuard],
+        children: [
+            {
+                path: 'auth/me',
+                component: MeComponent,
+            },
+            {
+                path: 'calendar',
+                component: CalendarComponent,
+            },
+            {
+                path: 'invoice',
+                component: InvoiceComponent,
+            },
+            {
+                path: 'quote',
+                component: QuoteComponent,
+            },
+            {
+                path: 'customer',
+                component: CustomerComponent,
+            },
+            {
+                path: 'information',
+                component: InformationComponent,
+            },
+            {
+                path: 'create-quote',
+                component: CreateQuoteComponent,
+            }
+        ],
     },
-    {
-        path: 'calendar',
-        component: CalendarComponent,
-        canActivate: [authGuard],
-    },
-    {
-        path: 'invoice',
-        component: InvoiceComponent,
-        canActivate: [authGuard],
-    },
-    {
-        path: 'quote',
-        component: QuoteComponent,
-        canActivate: [authGuard],
-    },
-    {
-        path: 'customer',
-        component: CustomerComponent,
-        canActivate: [authGuard],
-    },
-    {
-        path: 'information',
-        component: InformationComponent,
-        canActivate: [authGuard],
-    }
 ];

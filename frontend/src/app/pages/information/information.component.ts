@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationComponent } from '../../components/navigation/navigation.component';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -16,7 +15,6 @@ import { User } from '../../class/user';
   selector: 'app-information',
   standalone: true,
   imports: [
-    NavigationComponent,
     IconFieldModule,
     InputIconModule,
     InputTextModule,
