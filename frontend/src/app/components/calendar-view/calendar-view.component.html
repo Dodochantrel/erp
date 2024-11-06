@@ -1,0 +1,46 @@
+<p-tabView>
+
+    <p-tabPanel header="Mois">
+        <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [locale]="locale" [weekStartsOn]="weekStartsOn"
+            [weekendDays]="weekendDays" (dayClicked)="clickedDate = $event.day.date">
+        </mwl-calendar-month-view>
+    </p-tabPanel>
+
+    <p-tabPanel header="Semaine">
+        <mwl-calendar-week-view [viewDate]="viewDate" [events]="events" [locale]="locale" [weekStartsOn]="weekStartsOn"
+            [weekendDays]="weekendDays">
+        </mwl-calendar-week-view>
+    </p-tabPanel>
+
+</p-tabView>
+
+<div class="hour-controller">
+
+    <p class="text">Affichage de : </p>
+
+    <p-calendar [(ngModel)]="startHour" [iconDisplay]="'input'" [showIcon]="true" [timeOnly]="true"
+        inputId="templatedisplay">
+        <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
+            <i class="pi pi-clock pointer-events-none pointer-events-none" (click)="clickCallBack($event)"></i>
+        </ng-template>
+    </p-calendar>
+
+    <p class="text">à :</p>
+
+    <p-calendar [(ngModel)]="endHour" [iconDisplay]="'input'" [showIcon]="true" [timeOnly]="true"
+        inputId="templatedisplay" [hourFormat]="'24'" [stepMinute]="60">
+        <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
+            <i class="pi pi-clock pointer-events-none pointer-events-none" (click)="clickCallBack($event)"></i>
+        </ng-template>
+    </p-calendar>
+
+</div>
+
+
+<div class="container-footer">
+
+    <app-button [text]="'Précédent'" [color]="'red'" (click)="previousMonth()"></app-button>
+    <app-button [text]="'Aujourd\'hui'" [color]="'green'" (click)="goToToday()"></app-button>
+    <app-button [text]="'Suivant'" [color]="'blue'" (click)="nextMonth()"></app-button>
+
+</div>

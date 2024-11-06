@@ -1,10 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Event } from './event.entity';
-import { LessThan, MoreThan, Repository } from 'typeorm';
+import { IsNull, LessThan, MoreThan, Repository } from 'typeorm';
 import { UserService } from 'src/user/user.service';
 import { AppError } from 'src/error/app-error.exception';
 import { Dayjs } from 'dayjs';
 import { TypeEvent } from './type-event.entity';
+import { CustomerService } from 'src/customer/customer.service';
+import { Customer } from 'src/customer/customer.entity';
 
 @Injectable()
 export class EventService {
@@ -14,15 +16,19 @@ export class EventService {
     @Inject('TYPE_EVENT_REPOSITORY')
     private typeEventRepository: Repository<TypeEvent>,
     private readonly userService: UserService,
+    private customerService: CustomerService,
   ) {}
 
-  async create(event: Event, email: string, typeId: number): Promise<Event> {
+  async create(event: Event, email: string, typeId: number, customer: Customer | null): Promise<Event> {
     event.user = await this.userService.findByEmail(email);
+    event.customer = customer;
     event.type = await this.typeEventRepository.findOne({ where: { id: typeId } });
+    console.log(event);
     return this.eventRepository.save(event);
   }
 
-  async createType(type: TypeEvent): Promise<TypeEvent> {
+  async createType(type: TypeEvent, email: string): Promise<TypeEvent> {
+    type.user = await this.userService.findByEmail(email);
     return this.typeEventRepository.save(type);
   }
 
@@ -40,8 +46,9 @@ export class EventService {
     });
   }
 
-  async findAllType(): Promise<TypeEvent[]> {
-    return this.typeEventRepository.find();
+  async findAllType(email: string): Promise<TypeEvent[]> {
+    // Find all types for a specific user or with no user
+    return this.typeEventRepository.find({ where: [{ user: { email } }, { user: IsNull() }] });
   }
 
   async findOne(id: number, email: string): Promise<Event> {
@@ -50,8 +57,9 @@ export class EventService {
     return event;
   }
 
-  async update(id: number, event: Event, email: string, typeId: number): Promise<Event> {
+  async update(id: number, event: Event, email: string, typeId: number, customer: Customer | null): Promise<Event> {
     const existingEvent = await this.findOne(id, email);
+    event.customer = customer;
     event.type = await this.typeEventRepository.findOne({ where: { id: typeId } });
     return this.eventRepository.save({ ...existingEvent, ...event });
   }

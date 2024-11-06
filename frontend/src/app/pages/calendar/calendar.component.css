@@ -24,11 +24,3 @@
     padding: .5rem 1rem .5rem 2rem;
     font-size: 1rem;
 }
-
-.container-footer {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1rem;
-}

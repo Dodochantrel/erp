@@ -1,12 +1,15 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
+import { Company } from './company.entity';
 
 @Injectable()
 export class UserService {
   constructor(
     @Inject('USER_REPOSITORY')
     private userRepository: Repository<User>,
+    @Inject('COMPANY_REPOSITORY')
+    private companyRepository: Repository<Company>,
   ) {}
 
   async findAll(): Promise<User[]> {
@@ -28,6 +31,7 @@ export class UserService {
   }
 
   async update(user: User): Promise<void> {
+    console.log(user);
     await this.userRepository.update({ email: user.email }, user);
   }
 
@@ -53,6 +57,29 @@ export class UserService {
     return this.userRepository.findOne({
       where: { token: token },
       select: ['firstName', 'lastName', 'email', 'isValidate', 'token'],
+    });
+  }
+
+  async updateMySelf(user: User, email: string) {
+    const existingUser = await this.userRepository.findOne({
+      where: { email: email },
+      relations: ['company'],
+    });
+
+    if (!existingUser.company) {
+      user.company = await this.companyRepository.save(user.company);
+    } else {
+      user.company = await this.companyRepository.save({ ...existingUser.company, ...user.company });
+    }
+
+    return this.userRepository.save({ ...existingUser, ...user });
+  }
+
+  async getMySelf(email: string) {
+    return this.userRepository.findOne({
+      where: { email: email },
+      relations: ['company'],
+      select: ['id', 'firstName', 'lastName', 'email', 'company', 'phone'],
     });
   }
 }

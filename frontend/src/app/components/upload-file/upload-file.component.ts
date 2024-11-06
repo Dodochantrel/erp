@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { NotificationService } from '../../services/notification.service';
 import { FormGroup } from '@angular/forms';
 import { FileService } from '../../services/file.service';
 
@@ -12,26 +11,40 @@ import { FileService } from '../../services/file.service';
   templateUrl: './upload-file.component.html',
   styleUrl: './upload-file.component.css'
 })
-export class UploadFileComponent {
+export class UploadFileComponent implements OnInit {
   constructor(private readonly fileService: FileService) {}
 
   @Input() reactiveForm: FormGroup = new FormGroup({});
+  public imageBase64: string = '';
 
-  selectedFile: string | null = null;
+  ngOnInit() {
+    this.reactiveForm.valueChanges.subscribe((form) => {
+      this.imageBase64 = form.logo;
+    });
+  }
 
-  onSelectFile(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-      reader.onload = (loadEvent) => { // called once readAsDataURL is completed
-        if(loadEvent.target) {
-          this.selectedFile = loadEvent.target.result as string;
-          const fileEncoded = this.fileService.encodeFile(event.target.files[0]);
-          this.reactiveForm.setValue({ ...this.reactiveForm.value, logo: fileEncoded });
-        }
-      }
+  async onFileSelected(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.imageBase64 = await this.encodeImageBase64(file);
+      this.reactiveForm.setValue({ ...this.reactiveForm.value, logo: this.imageBase64 });
     }
+  }
+
+  encodeImageBase64(image: any): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        const base64Content = base64String.split(',')[1];
+        resolve(base64Content);
+      };
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(image);
+    });
+  }
+
+  decodeImageBase64(base64: string = ''): string {
+    return `data:image/png;base64,${base64}`;
   }
 }

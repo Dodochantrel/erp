@@ -36,16 +36,22 @@
                     <label for="lastName" class="label">Mon nom</label>
                     <p-iconField iconPosition="left">
                         <p-inputIcon styleClass="pi pi-user" />
-                        <input type="text" pInputText placeholder="Nom" class="input" formControlName="lastName" />
+                        <input type="text" pInputText placeholder="Nom" class="input" formControlName="lastName" [ngClass]="{'ng-invalid ng-dirty': informationForm.get('lastName')?.errors}" />
                     </p-iconField>
+                    @if (informationForm.get('lastName')?.hasError('required') && (informationForm.get('lastName')?.touched || informationForm.get('lastName')?.dirty)){
+                        <p class="text-error">Merci de renseigner votre nom</p>
+                    }
                 </div>
 
                 <div class="input-container">
                     <label for="firstName" class="label">Mon prénom</label>
                     <p-iconField iconPosition="left">
                         <p-inputIcon styleClass="pi pi-user" />
-                        <input type="text" pInputText placeholder="Prénom" class="input" formControlName="firstName" />
+                        <input type="text" pInputText placeholder="Prénom" class="input" formControlName="firstName" [ngClass]="{'ng-invalid ng-dirty': informationForm.get('firstName')?.errors}" />
                     </p-iconField>
+                    @if (informationForm.get('lastName')?.hasError('required') && (informationForm.get('firstName')?.touched || informationForm.get('lastName')?.dirty)){
+                        <p class="text-error">Merci de renseigner votre prénom</p>
+                    }
                 </div>
 
             </div>
@@ -101,7 +107,7 @@
 
         <div class="right">
 
-            <app-upload-file></app-upload-file>
+            <app-upload-file [reactiveForm]="informationForm"></app-upload-file>
 
             <app-form-buttons class="buttons-form" (cancel)="cancel()" (save)="save()"></app-form-buttons>
 

@@ -14,17 +14,17 @@ export class EventController {
 
   @Post()
   async create(@Body() dto: CreateEventDto, @UserEmail() email: string): Promise<EventDto> {
-    return mapFromEntityToDto(await this.eventService.create(mapFromDtoToEntity(dto), email, dto.typeId));
+    return mapFromEntityToDto(await this.eventService.create(mapFromDtoToEntity(dto), email, dto.typeId, dto.customer));
   }
 
   @Post('type')
-  async createType(@Body() dto: CreateTypeEventDto): Promise<TypeEventDto> {
-    return await this.eventService.createType(mapFromDtoToTypeEvent(dto));
+  async createType(@Body() dto: CreateTypeEventDto, @UserEmail() email: string): Promise<TypeEventDto> {
+    return await this.eventService.createType(mapFromDtoToTypeEvent(dto), email);
   }
 
   @Get('type')
-  async findAllType(): Promise<TypeEventDto[]> {
-    return await this.eventService.findAllType();
+  async findAllType(@UserEmail() email: string): Promise<TypeEventDto[]> {
+    return await this.eventService.findAllType(email);
   }
 
   @Get()
@@ -43,7 +43,9 @@ export class EventController {
 
   @Patch(':id')
   async update(@Body() dto: UpdateEventDto, @UserEmail() email: string, @Query('id') id: string): Promise<EventDto> {
-    return mapFromEntityToDto(await this.eventService.update(+id, mapFromDtoToEntity(dto), email, dto.typeId));
+    return mapFromEntityToDto(
+      await this.eventService.update(+id, mapFromDtoToEntity(dto), email, dto.typeId, dto.customer),
+    );
   }
 
   @Delete(':id')

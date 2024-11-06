@@ -82,4 +82,11 @@ export class CustomerService {
       throw new AppError('You are not authorized to access this resource', 403);
     }
   }
+
+  findNames(email: string): Promise<Customer[]> {
+    return this.customerRepository.find({
+      where: { user: { email } },
+      select: ['id', 'firstName', 'lastName'],
+    });
+  }
 }

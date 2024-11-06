@@ -7,6 +7,7 @@ import { GetCustomerDto, mapFromEntitiesPaginatedToDto, mapFromEntityToDto } fro
 import { DeleteResult } from 'typeorm';
 import { PaginatedResponse } from 'src/pagination/paginated-response';
 import { PageQuery } from 'src/pagination/page-query';
+import { GetCustomersNamesDto, mapFromEntitiesToDto } from './dto/get-names.dto';
 
 @Controller('customer')
 export class CustomerController {
@@ -17,7 +18,7 @@ export class CustomerController {
     return mapFromEntityToDto(await this.customerService.create(mapFromDtoToEntity(dto), email));
   }
 
-  @Get(':search')
+  @Get('search/:search')
   async findAll(
     @UserEmail() email: string,
     @Query() pageQuery: PageQuery,
@@ -45,5 +46,10 @@ export class CustomerController {
   @Delete(':id')
   async remove(@Param('id') id: string, @UserEmail() email: string): Promise<DeleteResult> {
     return this.customerService.remove(+id, email);
+  }
+
+  @Get('names')
+  async findNames(@UserEmail() email: string): Promise<GetCustomersNamesDto[]> {
+    return mapFromEntitiesToDto(await this.customerService.findNames(email));
   }
 }

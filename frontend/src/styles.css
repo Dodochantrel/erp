@@ -121,3 +121,8 @@ body {
     padding: 0.5rem;
     padding-left: 2.2rem;
 }
+
+.text {
+    padding: 0 !important;
+    margin: 0 !important;
+}

@@ -1,7 +1,7 @@
 <div class="container">
-    @if(selectedFile) {
+    @if(imageBase64) {
         <div class="container-preview">
-            <img [src]="selectedFile" alt="Prévisualisation de l'image" class="image-preview" />
+            <img [src]="decodeImageBase64(imageBase64)" alt="Prévisualisation de l'image" class="image-preview" />
         </div>
     } @else {
         <div class="folder">
@@ -10,7 +10,7 @@
         </div>
     }
     <label class="custom-file-upload">
-      <input class="title" type="file" (change)="onSelectFile($event)" accept="image/*" />
+      <input class="title" type="file" (change)="onFileSelected($event)" accept="image/*" />
       Choisir un fichier
     </label>
   </div>

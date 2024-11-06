@@ -4,6 +4,7 @@ import { api } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { Event, TypeEvent } from '../class/event';
 import { Dayjs } from 'dayjs';
+import { Customer } from '../class/customer';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,7 @@ export class EventService {
     return this.httpClient.post<TypeEvent>(this.prepareUrl('type'), { name, color });
   }
 
-  create(title: string, start: Dayjs, end: Dayjs, Type: TypeEvent, description: string | null): Observable<Event> {
-    return this.httpClient.post<Event>(this.prepareUrl(), { title, start, end, description, Type });
+  create(title: string, start: Dayjs, end: Dayjs, Type: TypeEvent, description: string | null, customer: Customer | null): Observable<Event> {
+    return this.httpClient.post<Event>(this.prepareUrl(), { title, start, end, description, Type, customer });
   }
 }

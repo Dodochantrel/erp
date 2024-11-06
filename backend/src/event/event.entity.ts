@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import { Dayjs } from 'dayjs';
 import { TypeEvent } from './type-event.entity';
+import { Customer } from 'src/customer/customer.entity';
 
 @Entity()
 export class Event {
@@ -40,6 +41,10 @@ export class Event {
   @ManyToOne(() => User, (user) => user.events)
   @JoinColumn()
   user: Relation<User>;
+
+  @ManyToOne(() => Customer, (customer) => customer.events)
+  @JoinColumn()
+  customer: Relation<Customer>;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
   public createdAt: Date;

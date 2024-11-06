@@ -12,6 +12,8 @@ import { ButtonComponent } from '../button/button.component';
 import { MatIconModule } from '@angular/material/icon';
 import { NotificationService } from '../../services/notification.service';
 import dayjs, { Dayjs } from 'dayjs';
+import { Customer } from '../../class/customer';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-add-event',
@@ -36,11 +38,13 @@ export class AddEventComponent implements OnInit {
     private formBuilder: FormBuilder,
     readonly eventService: EventService,
     private readonly ntificationService: NotificationService,
+    private readonly customerService: CustomerService,
   ) {}
 
   @Output() newEvent = new EventEmitter<Event>();
 
   public types: TypeEvent[] = [];
+  public customers: Customer[] = [];
 
   public eventForm = this.formBuilder.group({
     title: ['', Validators.required],
@@ -50,15 +54,28 @@ export class AddEventComponent implements OnInit {
     endHour: [null],
     description: [null],
     type: [null, Validators.required],
+    customer: [null],
   });
 
   ngOnInit() {
     this.findAllType();
+    this.findCustomers();
   }
 
-  prepareDateTime(date: Date, hour: Date | null | undefined): Dayjs {
+  findCustomers() {
+    this.customerService.getCustomersNames().subscribe({
+      next: (data) => {
+        this.customers = data;
+      },
+      error: (error) => {
+        this.ntificationService.show('Erreur lors de la récupération des clients', 'error');
+      },
+    });
+  }
+
+  prepareDateTime(date: Date, hour: Date | null): Dayjs {
     const dateFormatted = dayjs(date);
-    const hourFormatted = hour ? dayjs(hour) : dayjs('00:00', 'HH:mm');
+    const hourFormatted = hour ? dayjs(hour) : dayjs().set('hour', 0).set('minute', 0);
     return dateFormatted.hour(hourFormatted.hour()).minute(hourFormatted.minute());
   }
 
@@ -67,10 +84,11 @@ export class AddEventComponent implements OnInit {
       this.eventService
       .create(
         this.eventForm.value.title!,
-        this.prepareDateTime(this.eventForm.value.startDate!, this.eventForm.value.startHour),
-        this.prepareDateTime(this.eventForm.value.endDate!, this.eventForm.value.endHour),
+        this.prepareDateTime(this.eventForm.value.startDate!, this.eventForm.value.startHour === undefined ? null : this.eventForm.value.startHour),
+        this.prepareDateTime(this.eventForm.value.endDate!, this.eventForm.value.endHour === undefined ? null : this.eventForm.value.endHour),
         this.eventForm.value.type!,
         this.eventForm.value.description!,
+        this.eventForm.value.customer!,
       )
       .subscribe({
         next: (data) => {

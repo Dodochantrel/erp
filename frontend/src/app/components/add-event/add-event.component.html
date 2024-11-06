@@ -62,6 +62,13 @@
 
         </div>
 
+        <p-dropdown 
+            class="select input"
+            [options]="customers" 
+            formControlName="customer"
+            optionLabel="firstName"
+            placeholder="Associer à un client" />
+
         <textarea 
             class="input"
             formControlName="description"

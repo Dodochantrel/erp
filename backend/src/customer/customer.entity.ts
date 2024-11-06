@@ -5,10 +5,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   Relation,
   UpdateDateColumn,
 } from 'typeorm';
+import { Event } from 'src/event/event.entity';
 
 @Entity()
 export class Customer {
@@ -54,6 +56,9 @@ export class Customer {
   @ManyToOne(() => User, (user) => user.customers)
   @JoinColumn()
   user: Relation<User>;
+
+  @OneToMany(() => Event, (event) => event.customer)
+  events: Event[];
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
   public createdAt: Date;

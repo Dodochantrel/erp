@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import dayjs from 'dayjs';
 import { Event } from './../event.entity';
+import { Customer } from 'src/customer/customer.entity';
 
 export class UpdateEventDto {
   @ApiProperty({
@@ -39,6 +40,13 @@ export class UpdateEventDto {
     required: true,
   })
   typeId: number;
+
+  @ApiProperty({
+    description: 'Customer of the event',
+    type: Number,
+    required: false,
+  })
+  customer: Customer | null;
 }
 
 export const mapFromDtoToEntity = (dto: UpdateEventDto): Event => {

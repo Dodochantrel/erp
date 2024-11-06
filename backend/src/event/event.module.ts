@@ -5,9 +5,10 @@ import { UserModule } from 'src/user/user.module';
 import { DatabaseModule } from 'src/database/database.module';
 import { eventProviders } from './event.provider';
 import { typeEventProviders } from './type-event.provider';
+import { CustomerModule } from 'src/customer/customer.module';
 
 @Module({
-  imports: [DatabaseModule, UserModule],
+  imports: [DatabaseModule, UserModule, CustomerModule],
   controllers: [EventController],
   providers: [...eventProviders, EventService, ...typeEventProviders],
 })

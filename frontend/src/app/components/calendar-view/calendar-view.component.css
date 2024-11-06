@@ -1,0 +1,25 @@
+.container-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+:host ::ng-deep .p-tabview-panels {
+    padding: 1rem 0;
+}
+
+.hour-controller{
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+:host ::ng-deep .p-inputwrapper{
+    width: 90px;
+}
+
+:host ::ng-deep .p-inputtext{
+    padding: .5rem .8rem .5rem .7rem;
+}

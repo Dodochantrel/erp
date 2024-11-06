@@ -27,7 +27,11 @@ export class CustomerService {
   }
 
   getCustomers(page: number = 1, limit: number = 10, search: string | null = null): Observable<PaginatedResponse<Customer>> {
-    return this.httpClient.get<PaginatedResponse<Customer>>(this.prepareUrl(`${search}?page=${page}&limit=${limit}`));
+    return this.httpClient.get<PaginatedResponse<Customer>>(this.prepareUrl(`search/${search}?page=${page}&limit=${limit}`));
+  }
+
+  getCustomersNames(): Observable<Customer[]> {
+    return this.httpClient.get<Customer[]>(this.prepareUrl('names'));
   }
 
   save(

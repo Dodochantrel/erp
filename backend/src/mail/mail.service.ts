@@ -34,7 +34,6 @@ export class MailService {
     try {
       return await this.transporter.sendMail(mailOptions);
     } catch (error) {
-      console.log(error);
       throw new AppError("Erreur lors de l'envoi de l'email", 500);
     }
   }
