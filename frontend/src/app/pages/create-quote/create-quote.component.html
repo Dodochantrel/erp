@@ -4,31 +4,41 @@
 
 } @else {
 
-    <div class="quote">
+    <form [formGroup]="quoteForm" class="quote">
 
         <div class="first-line">
             <img [src]="decodeFile(user.company!.logoEncodedBase64)" alt="Logo" class="logo" />
             <p class="quote-number">Devis n°</p>
         </div>
     
-        <div class="second-line user">
-            <p class="name">{{ user.company?.name }}</p>
-            <p class="address">{{ user.company?.address }}</p>
-            <p class="city">{{ user.company?.city }}, {{ user.company?.postalCode }}</p>
-            <p class="siret">SIRET : {{ user.company?.siret }}</p>
-            <p class="phone">Tél: : {{ user.phone }}</p>
+        <div class="second-line">
+            <h2 class="text">Prestataire</h2>
+            <input class="input name" formControlName="companyName" />
+            <input class="input address" formControlName="companyAddress" />
+            <input class="input city" formControlName="companyCity" />
+            <div class="line">
+                <label class="label">Siret : </label>
+                <input class="input siret" formControlName="companySiret" />
+            </div>
+            <input class="input phone" formControlName="companyPhone" />
         </div>
 
-        <div class="third-line customer">
-            <p class="name">Nom</p>
-            <p class="address">Adresse</p>
-            <p class="city">Ville, code Postal</p>
-            <p class="siret">SIRET : </p>
-            <p class="phone">Tél : </p>
+        <div class="third-line">
+            <h2 class="text">Client</h2>
+            <input class="input name" formControlName="customerName" placeholder="Nom"/>
+            <input class="input address" formControlName="customerAddress" placeholder="Adresse" />
+            <input class="input city" formControlName="customerCity" placeholder="Ville, Code Postal" />
+            <div class="line">
+                <label class="label">Siret : </label>
+                <input class="input siret" formControlName="customerSiret" placeholder="Siret" />
+            </div>
+            <input class="input phone" formControlName="customerPhone" placeholder="Tél" />
         </div>
         
         <app-create-quote-table></app-create-quote-table>
+
+        <app-create-quote-price></app-create-quote-price>
     
-    </div>
+    </form>
 
 }

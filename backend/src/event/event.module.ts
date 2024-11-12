@@ -3,8 +3,8 @@ import { EventService } from './event.service';
 import { EventController } from './event.controller';
 import { UserModule } from 'src/user/user.module';
 import { DatabaseModule } from 'src/database/database.module';
-import { eventProviders } from './event.provider';
-import { typeEventProviders } from './type-event.provider';
+import { eventProviders } from './event.providers';
+import { typeEventProviders } from './type-event.providers';
 import { CustomerModule } from 'src/customer/customer.module';
 
 @Module({

@@ -1,0 +1,36 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5%;
+}
+
+.create-quote-price {
+    width: 50%;
+    border: 1px solid var(--border-color);
+    border-collapse: collapse;
+    position: relative;
+}
+
+.header-element,
+.body-element {
+    border: 1px solid var(--border-color);
+    padding: 2% 2%;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
+
+.header-element {
+    background-color: var(--button-blue-color);
+    color: white;
+    font-weight: normal;
+}
+
+.body-element {
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.price-total{
+    font-weight: bold;
+}

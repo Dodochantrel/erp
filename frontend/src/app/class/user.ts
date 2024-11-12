@@ -5,7 +5,7 @@ export class User {
     firstName: string;
     lastName: string;
     email: string;
-    phone: number | null;
+    phone: string | null;
     password: string | null;
     role: string;
     createdAt: Date;

@@ -58,7 +58,7 @@ export class InformationComponent implements OnInit {
     companyName: [null as string | null],
     siret: [null as string | null],
     email: [null as string | null],
-    phoneNumber: [null as number | null],
+    phoneNumber: [null as string | null],
     address: [null as string | null],
     city: [null as string | null],
     zipCode: [null as number | null],
@@ -75,7 +75,7 @@ export class InformationComponent implements OnInit {
       phoneNumber: user.phone || null,
       address: user.company?.address || null,
       city: user.company?.city || null,
-      zipCode: user.company?.postalCode || null,
+      zipCode: user.company?.zipCode || null,
       logo: user.company?.logoEncodedBase64 || null,
     });
   }

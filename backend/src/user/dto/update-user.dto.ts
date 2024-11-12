@@ -71,7 +71,7 @@ export class UpdateUserDto {
     type: String,
     example: '75000',
   })
-  postalCode: string;
+  zipCode: string;
 }
 
 export const mapFromDtoToEntity = (dto: UpdateUserDto) => {
@@ -87,7 +87,7 @@ export const mapFromDtoToEntity = (dto: UpdateUserDto) => {
   user.phone = dto.phone;
   company.address = dto.address;
   company.city = dto.city;
-  company.postalCode = dto.postalCode;
+  company.zipCode = dto.zipCode;
   user.company = company;
   return user;
 };

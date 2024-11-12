@@ -4,11 +4,13 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../class/user';
 import { FileService } from '../../services/file.service';
 import { CreateQuoteTableComponent } from '../../components/create-quote-table/create-quote-table.component';
+import { CreateQuotePriceComponent } from '../../components/create-quote-price/create-quote-price.component';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-quote',
   standalone: true,
-  imports: [CreateQuoteTableComponent],
+  imports: [CreateQuoteTableComponent, CreateQuotePriceComponent, ReactiveFormsModule],
   templateUrl: './create-quote.component.html',
   styleUrl: './create-quote.component.css',
 })
@@ -16,11 +18,26 @@ export class CreateQuoteComponent implements OnInit {
   constructor(
     private notificationService: NotificationService,
     private readonly userService: UserService,
-    private readonly fileService: FileService
+    private readonly fileService: FileService,
+    private formBuilder: FormBuilder
   ) {}
 
   public user: User = new User();
   public isLoading: boolean = false;
+
+  public quoteForm = this.formBuilder.group({
+    companyName: ['', Validators.required],
+    companyAddress: ['', Validators.required],
+    companyCity: ['', Validators.required],
+    companyZipCode: [0, Validators.required],
+    companySiret: [''],
+    companyPhone: [''],
+    customerName: ['', Validators.required],
+    customerAddress: ['', Validators.required],
+    customerCity: ['', Validators.required],
+    customerZipCode: ['', Validators.required],
+    customerPhone: [''],
+  });
 
   ngOnInit(): void {
     this.getInformations();
@@ -31,7 +48,7 @@ export class CreateQuoteComponent implements OnInit {
     this.userService.getUser().subscribe({
       next: (user) => {
         this.user = user;
-        console.log(this.user);
+        this.prepareForm();
       },
       error: () => {
         this.notificationService.show('Une erreur est survenue', 'error');
@@ -48,5 +65,14 @@ export class CreateQuoteComponent implements OnInit {
     } else {
       return null;
     } 
+  }
+
+  prepareForm() {
+    this.quoteForm.controls['companyName'].setValue(this.user.company?.name ?? '');
+    this.quoteForm.controls['companyAddress'].setValue(this.user.company?.address ?? '');
+    this.quoteForm.controls['companyCity'].setValue(this.user.company?.city ?? '');
+    this.quoteForm.controls['companyZipCode'].setValue(this.user.company?.zipCode ?? 0);
+    this.quoteForm.controls['companySiret'].setValue(this.user.company?.siret ?? '');
+    this.quoteForm.controls['companyPhone'].setValue(this.user.phone ?? '');
   }
 }

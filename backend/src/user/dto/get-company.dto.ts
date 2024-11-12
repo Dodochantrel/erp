@@ -49,7 +49,7 @@ export class GetCompanyDto {
     type: String,
     example: '75000',
   })
-  postalCode: string;
+  zipCode: string;
 }
 
 export const mapFromCompanyEntity = (company: Company): GetCompanyDto => {
@@ -60,6 +60,6 @@ export const mapFromCompanyEntity = (company: Company): GetCompanyDto => {
   dto.logoEncodedBase64 = company.logoEncodedBase64;
   dto.address = company.address;
   dto.city = company.city;
-  dto.postalCode = company.postalCode;
+  dto.zipCode = company.zipCode;
   return dto;
 };

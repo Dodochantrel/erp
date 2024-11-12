@@ -15,10 +15,13 @@
 .header-element {
     background-color: var(--button-blue-color);
     color: white;
+    font-size: 1.2rem;
+    font-weight: normal;
 }
 
 .body-element {
     text-align: center;
+    box-sizing: border-box;
 }
 
 .body-element.description {
@@ -36,7 +39,7 @@
 
 .add-quote-line {
     position: absolute;
-    bottom: 0;
+    bottom: -15px;
     left: 50%;
     transform: translate(-50%);
     border-radius: 100%;
@@ -49,9 +52,41 @@
     font-size: 1.7rem;
     color: white;
     cursor: pointer;
-    transition: transform .6s;
+    transition: all .6s;
 }
 
-.add-quote-line:hover {
-    transform: scale(1.1);
+input {
+    all: unset;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.body {
+    position: relative;
+}
+
+.remove-quote-line {
+    position: absolute;
+    right: -15px; 
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background-color: var(--button-green-color);
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.6s;
+}
+
+:host ::ng-deep .p-autocomplete {
+    width: 100%;
+}
+
+:host ::ng-deep .p-autocomplete-input{
+    width: 90%;
 }

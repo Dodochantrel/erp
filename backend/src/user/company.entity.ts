@@ -27,7 +27,7 @@ export class Company {
   city: string;
 
   @Column({ nullable: true })
-  postalCode: string;
+  zipCode: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;

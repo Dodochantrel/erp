@@ -1,0 +1,25 @@
+<div class="container">
+
+    <table class="create-quote-price">
+
+        <tbody>
+
+            <tr class="body">
+                <th class="header-element">Prix HT</th>
+                <td class="body-element price-out-taxes">{{ quoteService.totalPriceQuoteWithoutTaxes }} €</td>
+            </tr>
+
+            <tr class="body">
+                <th class="header-element">TVA (20%)</th>
+                <td class="body-element taxes">{{ quoteService.totalTaxesQuote }} €</td>
+            </tr>
+
+            <tr class="body">
+                <th class="header-element">Prix TTC</th>
+                <td class="body-element price-total">{{ quoteService.totalQuotePrice }} €</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+</div>

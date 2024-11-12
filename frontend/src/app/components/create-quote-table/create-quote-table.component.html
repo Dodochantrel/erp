@@ -12,15 +12,34 @@
 
   <tbody>
 
-    <tr class="body">
-      @for(quoteLine of quoteLines; track quoteLine.id) {
-        <td class="body-element description">Description</td>
-        <td class="body-element quantity">Quantité</td>
-        <td class="body-element price">Prix unitaire</td>
-      }
-    </tr>
+    @for(quoteLine of quoteService.quoteLines; track $index) {
+      <tr class="body">
+        
+        <td class="body-element description">
+          <p-autoComplete
+            [(ngModel)]="quoteLine.description"
+            name="description-{{$index}}"
+            [dropdown]="true"
+            [suggestions]="filteredQuoteLinesSaved"
+            (completeMethod)="filterCountry($event)"
+            optionLabel="name"
+            class="input" />
+        </td>
+
+        <td class="body-element quantity">
+          <input type="text" class="input" placeholder="Quantité" [(ngModel)]="quoteLine.quantity" name="quantity-{{$index}}" (ngModelChange)="changePrice()" type="number"/>
+        </td>
+
+        <td class="body-element price">
+          <input type="text" class="input" placeholder="Prix" [(ngModel)]="quoteLine.price" name="price-{{$index}}" (ngModelChange)="changePrice()" type="number"/>
+        </td>
+        
+        <a class="remove-quote-line" (click)="removeQuoteLine(quoteLine)">-</a>
+
+      </tr>
+    }
 
   </tbody>
 
-  <a class="add-quote-line">+</a>
+  <a class="add-quote-line" (click)="addQuoteLine()">+</a>
 </table>

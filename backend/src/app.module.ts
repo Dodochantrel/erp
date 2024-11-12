@@ -9,6 +9,7 @@ import { AdminModule } from './admin/admin.module';
 import { JwtStrategy } from './guards/jwt.strategy';
 import { CustomerModule } from './customer/customer.module';
 import { EventModule } from './event/event.module';
+import { QuoteModule } from './quote/quote.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { EventModule } from './event/event.module';
     AdminModule,
     CustomerModule,
     EventModule,
+    QuoteModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

@@ -19,11 +19,11 @@ export class UserService {
     firstName: string | null,
     lastName: string | null,
     email: string | null,
-    phone: number | null,
+    phone: string | null,
     address: string | null,
     city: string | null,
     logoEncodedBase64: string | null,
-    postalCode: number | null
+    zipCode: number | null
   ) {
     return this.http.patch(`${this.prepareUrl('my-self')}`, {
       company,
@@ -35,7 +35,7 @@ export class UserService {
       address,
       city,
       logoEncodedBase64,
-      postalCode,
+      zipCode,
     });
   }
 
