@@ -2,11 +2,10 @@
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    margin-top: 5%;
 }
 
 .create-quote-price {
-    width: 50%;
+    width: 100%;
     border: 1px solid var(--border-color);
     border-collapse: collapse;
     position: relative;

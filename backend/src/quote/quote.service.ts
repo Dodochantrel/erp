@@ -1,9 +1,56 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Quote } from './quote.entity';
 import { Repository } from 'typeorm';
+import { DefaultQuoteLine } from './default-quote-line.entity';
+import { QuoteLine } from './quote-line.entity';
+import { UserService } from 'src/user/user.service';
+import { User } from 'src/user/user.entity';
+import { AppError } from 'src/error/app-error.exception';
 
 @Injectable()
 export class QuoteService {
-  @Inject('QUOTE_REPOSITORY')
-  private quoteRepository: Repository<Quote>;
+  constructor(
+    @Inject('QUOTE_REPOSITORY')
+    private quoteRepository: Repository<Quote>,
+    @Inject('DEFAULT_QUOTE_LINE_REPOSITORY')
+    private defaultQuoteLineRepository: Repository<DefaultQuoteLine>,
+    @Inject('QUOTE_LINE_REPOSITORY')
+    private quoteLineRepository: Repository<QuoteLine>,
+    private readonly userService: UserService,
+  ) {}
+
+  findAllDefaultQuoteLines(email: string): Promise<DefaultQuoteLine[]> {
+    return this.defaultQuoteLineRepository.find({ where: { user: { email } } });
+  }
+
+  async createDefaultQuoteLine(email: string, description: string, unitPrice: number): Promise<DefaultQuoteLine> {
+    const defaultQuoteLine = new DefaultQuoteLine(description, unitPrice);
+    defaultQuoteLine.user = await this.userService.findByEmail(email);
+    return this.defaultQuoteLineRepository.save(defaultQuoteLine);
+  }
+
+  async updateDefaultQuoteLine(
+    email: string,
+    id: number,
+    description: string,
+    unitPrice: number,
+  ): Promise<DefaultQuoteLine> {
+    const defaultQuoteLine = await this.defaultQuoteLineRepository.findOne({ where: { id }, relations: ['user'] });
+    this.checkIfAuthorized(defaultQuoteLine.user, email);
+    defaultQuoteLine.description = description;
+    defaultQuoteLine.unitPrice = unitPrice;
+    return this.defaultQuoteLineRepository.save(defaultQuoteLine);
+  }
+
+  async deleteDefaultQuoteLine(email: string, id: number): Promise<void> {
+    const defaultQuoteLine = await this.defaultQuoteLineRepository.findOne({ where: { id }, relations: ['user'] });
+    this.checkIfAuthorized(defaultQuoteLine.user, email);
+    await this.defaultQuoteLineRepository.delete(id);
+  }
+
+  checkIfAuthorized(user: User, email: string): void {
+    if (user.email !== email) {
+      throw new AppError('You are not authorized to access this resource', 403);
+    }
+  }
 }

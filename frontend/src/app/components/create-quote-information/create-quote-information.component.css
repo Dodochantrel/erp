@@ -1,0 +1,7 @@
+.textarea {
+    width: 100%;
+}
+
+:host ::ng-deep .p-inputtextarea-resizable {
+    width: 100%;
+}

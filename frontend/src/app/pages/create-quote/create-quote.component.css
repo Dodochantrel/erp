@@ -38,6 +38,31 @@
     font-size: 1rem;
 }
 
+.fourth-line {
+    margin-top: 1rem;
+}
+
+.fifth-line {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    font-size: 1rem;
+    flex-wrap: wrap;
+}
+
+.fifth-line *{
+    flex: 1;
+    min-width: 400px;
+}
+
+.sixth-line {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .input {
     all: unset;
     box-sizing: border-box;

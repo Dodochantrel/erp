@@ -6,11 +6,13 @@ import { FileService } from '../../services/file.service';
 import { CreateQuoteTableComponent } from '../../components/create-quote-table/create-quote-table.component';
 import { CreateQuotePriceComponent } from '../../components/create-quote-price/create-quote-price.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CreateQuoteInformationComponent } from '../../components/create-quote-information/create-quote-information.component';
+import { ButtonComponent } from '../../components/button/button.component';
 
 @Component({
   selector: 'app-create-quote',
   standalone: true,
-  imports: [CreateQuoteTableComponent, CreateQuotePriceComponent, ReactiveFormsModule],
+  imports: [CreateQuoteTableComponent, CreateQuotePriceComponent, ReactiveFormsModule, CreateQuoteInformationComponent, ButtonComponent],
   templateUrl: './create-quote.component.html',
   styleUrl: './create-quote.component.css',
 })
@@ -36,7 +38,9 @@ export class CreateQuoteComponent implements OnInit {
     customerAddress: ['', Validators.required],
     customerCity: ['', Validators.required],
     customerZipCode: ['', Validators.required],
+    customerSiret: [''],
     customerPhone: [''],
+    moreInformation: [''],
   });
 
   ngOnInit(): void {
@@ -74,5 +78,9 @@ export class CreateQuoteComponent implements OnInit {
     this.quoteForm.controls['companyZipCode'].setValue(this.user.company?.zipCode ?? 0);
     this.quoteForm.controls['companySiret'].setValue(this.user.company?.siret ?? '');
     this.quoteForm.controls['companyPhone'].setValue(this.user.phone ?? '');
+  }
+
+  save() {
+    console.log(this.quoteForm.value);
   }
 }

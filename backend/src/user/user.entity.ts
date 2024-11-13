@@ -3,6 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, Relation, OneToOne, 
 import { Event } from '../event/event.entity';
 import { Company } from './company.entity';
 import { TypeEvent } from 'src/event/type-event.entity';
+import { DefaultQuoteLine } from 'src/quote/default-quote-line.entity';
 
 @Entity()
 export class User {
@@ -54,4 +55,7 @@ export class User {
   @OneToOne(() => Company, (company) => company.user)
   @JoinColumn()
   company: Company;
+
+  @OneToMany(() => DefaultQuoteLine, (defaultQuoteLine) => defaultQuoteLine.user)
+  defaultQuoteLines: Relation<DefaultQuoteLine>[];
 }

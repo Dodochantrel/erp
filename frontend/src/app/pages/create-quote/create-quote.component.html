@@ -35,10 +35,18 @@
             <input class="input phone" formControlName="customerPhone" placeholder="Tél" />
         </div>
         
-        <app-create-quote-table></app-create-quote-table>
-
-        <app-create-quote-price></app-create-quote-price>
+        <div class="fourth-line">
+            <app-create-quote-table></app-create-quote-table>
+        </div>
+        
+        <div class="fifth-line">
+            <app-create-quote-information></app-create-quote-information>
+            <app-create-quote-price></app-create-quote-price>
+        </div>
     
+        <div class="sixth-line">
+            <app-button [text]="'Générer le devis'" [color]="'blue'" (output)="save()">Enregistrer</app-button>
+        </div>
     </form>
 
 }
