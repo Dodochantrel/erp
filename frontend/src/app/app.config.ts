@@ -20,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideAnimations(),
+    provideAnimations(),
     provideToastr({
       timeOut: 8000,
       positionClass: 'toast-bottom-right',

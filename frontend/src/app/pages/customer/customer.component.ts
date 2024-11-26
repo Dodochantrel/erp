@@ -56,7 +56,7 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCustomers(this.meta.page, this.meta.limit);
+    this.getCustomers();
     this.search();    
   }
 
@@ -69,14 +69,14 @@ export class CustomerComponent implements OnInit {
     )
     .subscribe((searchTerm: string) => {
       if (searchTerm === '') {
-        this.getCustomers(this.meta.page, this.meta.limit, null);
+        this.getCustomers(null);
       } else {
-        this.getCustomers(this.meta.page, this.meta.limit, searchTerm);
+        this.getCustomers(searchTerm);
       }
     });
   }
 
-  getCustomers(page: number, limit: number, search: string | null = null): void {
+  getCustomers(search: string | null = null): void {
     this.isLoading = true;
     this.customerService
       .getCustomers(this.meta.page, this.meta.limit, search)
@@ -114,7 +114,7 @@ export class CustomerComponent implements OnInit {
 
   onChangeMeta(meta: any): void {
     this.meta = meta;
-    this.getCustomers(this.meta.page, this.meta.limit);
+    this.getCustomers();
   }
 
   handleEditCustomer(customer: Customer): void {
@@ -135,5 +135,9 @@ export class CustomerComponent implements OnInit {
         );
       },
     });
+  }
+
+  prepareName(customer: Customer): string {
+    return customer.isCompany ? customer.companyName! : `${customer.lastName!.toUpperCase()} ${customer.firstName}`;
   }
 }

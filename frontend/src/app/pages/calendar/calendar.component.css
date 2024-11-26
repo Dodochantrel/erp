@@ -24,3 +24,7 @@
     padding: .5rem 1rem .5rem 2rem;
     font-size: 1rem;
 }
+
+:host ::ng-deep p-calendar .p-inputtext {
+    padding: .5rem 2rem .5rem 1rem;
+}

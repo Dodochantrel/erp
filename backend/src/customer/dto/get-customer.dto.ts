@@ -5,6 +5,27 @@ import { PageQuery } from 'src/pagination/page-query';
 
 export class GetCustomerDto {
   @ApiProperty({
+    description: 'Establish if the customer is a company or not',
+    type: Boolean,
+    example: true,
+  })
+  isCompany: boolean;
+
+  @ApiProperty({
+    description: 'Company name',
+    type: String,
+    example: 'Company Inc.',
+  })
+  companyName: string;
+
+  @ApiProperty({
+    description: 'Siret company',
+    type: String,
+    example: '12255454',
+  })
+  siret: string;
+
+  @ApiProperty({
     description: 'The id of the customer',
     type: Number,
     example: 1,
@@ -71,6 +92,9 @@ export class GetCustomerDto {
 export const mapFromEntityToDto = (entity: Customer): GetCustomerDto => {
   const dto = new GetCustomerDto();
   dto.id = entity.id;
+  dto.isCompany = entity.isCompany;
+  dto.companyName = entity.companyName;
+  dto.siret = entity.siret;
   dto.firstName = entity.firstName;
   dto.lastName = entity.lastName;
   dto.email = entity.email;

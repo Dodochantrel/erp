@@ -3,6 +3,27 @@ import { Customer } from '../customer.entity';
 
 export class CreateCustomerDto {
   @ApiProperty({
+    description: 'Establish if the customer is a company or not',
+    type: Boolean,
+    example: true,
+  })
+  isCompany: boolean;
+
+  @ApiProperty({
+    description: 'Company name',
+    type: String,
+    example: 'Company Inc.',
+  })
+  companyName: string;
+
+  @ApiProperty({
+    description: 'Siret company',
+    type: String,
+    example: '12255454',
+  })
+  siret: string;
+
+  @ApiProperty({
     description: 'The first name of the customer',
     type: String,
     example: 'John',
@@ -60,12 +81,19 @@ export class CreateCustomerDto {
 }
 
 export const mapFromDtoToEntity = (dto: CreateCustomerDto): Customer => {
-  const customer = new Customer(dto.firstName, dto.lastName);
+  console.log(dto);
+  const customer = new Customer();
+  customer.isCompany = dto.isCompany;
+  customer.companyName = dto.companyName;
+  customer.siret = dto.siret;
+  customer.firstName = dto.firstName;
+  customer.lastName = dto.lastName;
   customer.email = dto.email;
   customer.phoneNumber = dto.phoneNumber;
   customer.address = dto.address;
   customer.city = dto.city;
   customer.country = dto.country;
   customer.zipCode = dto.zipCode;
+  console.log(customer);
   return customer;
 };

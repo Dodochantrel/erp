@@ -1,0 +1,52 @@
+<div class="header">
+    <h2 class="title">Liste de vos lignes devis</h2>
+</div>
+
+<div class="content">
+
+    <div class="table-container">
+
+        <div class="actions-header">
+            <app-button [text]='"Ajouté une ligne devis"' [color]='"blue"' (output)='quoteService.handleIsAddDefaultQuoteLine()'></app-button>
+        </div>
+
+        @if(!isLoading) {
+            <p-table [value]="defaultQuoteLines" styleClass=" p-datatable-striped p-datatable-sm"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                [scrollable]="true" 
+                scrollHeight="70vh" 
+                [virtualScroll]="true"
+                [virtualScrollItemSize]="46">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>#</th>
+                        <th>Description</th>
+                        <th>Prix unitaire</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-customer>
+                    <tr>
+                        <td>{{ customer.id }}</td>
+                        <td>{{ customer.description }}</td>
+                        <td>{{ customer.price }}</td>
+                    </tr>
+
+                </ng-template>
+
+            </p-table>
+
+        } @else {
+            <app-loader></app-loader>
+        }
+
+        <app-pagination [meta]="meta" (onChange)="onChangeMeta($event)"></app-pagination>
+
+    </div>
+    
+</div>
+
+@if(quoteService.isAddDefaultQuoteLine) {
+    <app-add-default-quote-line (newDefaultQuoteLine)="addNewDefaultQuoteLine($event)"></app-add-default-quote-line>
+}

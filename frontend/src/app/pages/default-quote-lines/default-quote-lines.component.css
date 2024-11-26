@@ -33,8 +33,3 @@
 .delete{
     color: var(--button-red-color);
 }
-
-.input-search {
-    padding: .5rem 1rem .5rem 2rem;
-    font-size: 1rem;
-}

@@ -39,7 +39,7 @@
                 <ng-template pTemplate="body" let-customer>
                     <tr>
                         <td>{{ customer.id }}</td>
-                        <td>{{ customer.lastName.toUpperCase() }} {{ customer.firstName }}</td>
+                        <td>{{ prepareName(customer) }}</td>
                         <td>{{ customer.email }}</td>
                         <td>{{ customer.phoneNumber }}</td>
                         <td>{{ customer.address }}</td>

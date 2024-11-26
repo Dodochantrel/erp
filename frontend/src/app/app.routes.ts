@@ -13,6 +13,7 @@ import { CustomerComponent } from './pages/customer/customer.component';
 import { InformationComponent } from './pages/information/information.component';
 import { ViewWithNavigationComponent } from './layouts/view-with-navigation/view-with-navigation.component';
 import { CreateQuoteComponent } from './pages/create-quote/create-quote.component';
+import { DefaultQuoteLinesComponent } from './pages/default-quote-lines/default-quote-lines.component';
 
 export const routes: Routes = [
     {
@@ -67,6 +68,10 @@ export const routes: Routes = [
             {
                 path: 'create-quote',
                 component: CreateQuoteComponent,
+            },
+            {
+                path: 'default-quote-line',
+                component: DefaultQuoteLinesComponent,
             }
         ],
     },

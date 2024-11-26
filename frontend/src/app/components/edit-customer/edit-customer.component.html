@@ -6,17 +6,63 @@
 
         <div class="row">
 
-            <p-floatLabel class="input">
-                <input pInputText id="lastName" formControlName="lastName" class="input"/>
-                <label for="lastName">Nom</label>
-            </p-floatLabel>
-
-            <p-floatLabel class="input">
-                <input pInputText id="firstName" formControlName="firstName" class="input"/>
-                <label for="firstName">Prénom</label>
-            </p-floatLabel>
-
+            <p-selectButton 
+                [options]="optionsCustomer" 
+                optionLabel="label" 
+                optionValue="value"
+                formControlName="isCompany" />
+            
         </div>
+
+        @if(customerForm.get('isCompany')!.value === true) {
+
+            <div class="row">
+                <p-floatLabel class="input">
+                    <input pInputText id="companyName" formControlName="companyName" class="input"/>
+                    <label for="companyName">Nom de l'entreprise</label>
+                </p-floatLabel>
+            </div>
+
+            <div class="row">
+
+                <p-floatLabel class="input">
+                    <input pInputText id="siret" formControlName="siret" class="input"/>
+                    <label for="siret">Siret de l'entreprise</label>
+                </p-floatLabel>
+
+            </div>
+
+            <div class="row">
+
+                <p-floatLabel class="input">
+                    <input pInputText id="lastName" formControlName="lastName" class="input"/>
+                    <label for="lastName">Nom du contact</label>
+                </p-floatLabel>
+    
+                <p-floatLabel class="input">
+                    <input pInputText id="firstName" formControlName="firstName" class="input"/>
+                    <label for="firstName">Prénom du contact</label>
+                </p-floatLabel>
+    
+            </div>
+
+        } @else {
+
+            <div class="row">
+
+                <p-floatLabel class="input">
+                    <input pInputText id="lastName" formControlName="lastName" class="input"/>
+                    <label for="lastName">Nom</label>
+                </p-floatLabel>
+    
+                <p-floatLabel class="input">
+                    <input pInputText id="firstName" formControlName="firstName" class="input"/>
+                    <label for="firstName">Prénom</label>
+                </p-floatLabel>
+    
+            </div>
+
+        }
 
         <p-floatLabel class="input">
             <input pInputText id="email" formControlName="email" class="input"/>

@@ -10,6 +10,20 @@ export class GetCustomersNamesDto {
   id: number;
 
   @ApiProperty({
+    description: 'Establish if the customer is a company or not',
+    type: Boolean,
+    example: true,
+  })
+  isCompany: boolean;
+
+  @ApiProperty({
+    description: 'Company name',
+    type: String,
+    example: 'Company Inc.',
+  })
+  companyName: string;
+
+  @ApiProperty({
     description: 'The first name of the customer',
     type: String,
     example: 'John',
@@ -23,15 +37,23 @@ export class GetCustomersNamesDto {
   })
   lastName: string;
 
-  constructor(id: number, firstName: string, lastName: string) {
+  constructor(
+    id: number,
+    isCompany: boolean,
+    companyName: string | null = null,
+    firstName: string | null = null,
+    lastName: string | null = null,
+  ) {
     this.id = id;
+    this.isCompany = isCompany;
+    this.companyName = companyName;
     this.firstName = firstName;
     this.lastName = lastName;
   }
 }
 
 export const mapFromEntityToDto = (entity: Customer): GetCustomersNamesDto => {
-  return new GetCustomersNamesDto(entity.id, entity.firstName, entity.lastName);
+  return new GetCustomersNamesDto(entity.id, entity.isCompany, entity.companyName, entity.firstName, entity.lastName);
 };
 
 export const mapFromEntitiesToDto = (entities: Customer[]): GetCustomersNamesDto[] => {

@@ -86,7 +86,7 @@ export class CustomerService {
   findNames(email: string): Promise<Customer[]> {
     return this.customerRepository.find({
       where: { user: { email } },
-      select: ['id', 'firstName', 'lastName'],
+      select: ['id', 'firstName', 'lastName', 'isCompany', 'companyName'],
     });
   }
 }

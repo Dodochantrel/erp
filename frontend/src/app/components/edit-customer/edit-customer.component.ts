@@ -11,6 +11,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormButtonsComponent } from '../form-buttons/form-buttons.component';
 import { NotificationService } from '../../services/notification.service';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-edit-customer',
@@ -20,6 +21,7 @@ import { NotificationService } from '../../services/notification.service';
     ReactiveFormsModule,
     InputTextModule,
     FloatLabelModule,
+    SelectButtonModule,
     FormButtonsComponent,
   ],
   templateUrl: './edit-customer.component.html',
@@ -29,6 +31,8 @@ export class EditCustomerComponent implements OnChanges {
   @Input() customer: Customer | null = null;
   @Output() updatedCustomer = new EventEmitter<Customer>();
 
+  public optionsCustomer: any[] = [{ label: 'Particuler', value: false },{ label: 'Entreprise', value: true }];
+
   constructor(
     private formBuilder: FormBuilder,
     readonly customerService: CustomerService,
@@ -37,11 +41,15 @@ export class EditCustomerComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['customer'] && this.customer) {
+      console.log('customer', this.customer);
       this.updateForm();
     }
   }
 
   public customerForm = this.formBuilder.group({
+    isCompany: [this.customer?.isCompany],
+    siret: [this.customer?.siret],
+    companyName: [this.customer?.companyName],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: [this.customer?.email],
@@ -55,6 +63,9 @@ export class EditCustomerComponent implements OnChanges {
   updateForm(): void {
     if (this.customer) {
       this.customerForm.setValue({
+        isCompany: this.customer.isCompany,
+        siret: this.customer.siret,
+        companyName: this.customer.companyName,
         firstName: this.customer.firstName,
         lastName: this.customer.lastName,
         email: this.customer.email,
@@ -87,9 +98,12 @@ export class EditCustomerComponent implements OnChanges {
   buildCustomer(): Customer {
     const customer = new Customer(
       this.customer!.id,
-      this.customerForm.value.firstName!,
-      this.customerForm.value.lastName!,
+      this.customer!.isCompany,
     );
+    customer.firstName = this.customerForm.value.firstName || null;
+    customer.lastName = this.customerForm.value.lastName || null;
+    customer.siret = this.customerForm.value.siret || null;
+    customer.companyName = this.customerForm.value.companyName || null;
     customer.email = this.customerForm.value.email || null;
     customer.phoneNumber = this.customerForm.value.phoneNumber || null;
     customer.address = this.customerForm.value.address || null;

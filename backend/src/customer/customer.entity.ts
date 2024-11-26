@@ -17,10 +17,29 @@ export class Customer {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    default: false,
+  })
+  isCompany: boolean;
+
+  @Column({
+    nullable: true,
+  })
+  companyName: string;
+
+  @Column({
+    nullable: true,
+  })
+  siret: string;
+
+  @Column({
+    nullable: true,
+  })
   firstName: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   lastName: string;
 
   @Column({
@@ -65,9 +84,4 @@ export class Customer {
 
   @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)', onUpdate: 'CURRENT_TIMESTAMP(6)' })
   public updatedAt: Date;
-
-  constructor(firstName: string, lastName: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
 }

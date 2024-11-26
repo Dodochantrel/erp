@@ -1,3 +1,21 @@
+<div class="header">
+
+        <p-floatLabel>
+            <p-autoComplete
+                [(ngModel)]="selectedCustomer"
+                optionLabel="name" 
+                [dropdown]="true"
+                [suggestions]="filteredCustomerNamesSaved"
+                (completeMethod)="filterCustomer($event)"
+                (onSelect)="onCustomerSelected($event)"
+                optionLabel="name" />
+            <label for="dispatchNumber">Associer a un client</label>
+        </p-floatLabel>
+
+        <app-button [text]="'Enregistrer des lignes devis'" [color]="'blue'" (output)="redirectEditQuoteLine()">Nouveau client</app-button>
+
+</div>
+
 @if(isLoading) {
 
     <p>Chargement</p>

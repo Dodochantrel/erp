@@ -18,7 +18,11 @@ export class NavigationComponent {
   public navigationItems: NavigationItem[] = [
     { name: 'Accueil', icon: 'home', path: '/home' },
     { name: 'Calendrier', icon: 'calendar_today', path: '/calendar' },
-    { name: 'Devis', icon: 'description', path: '/quote' },
+    { name: 'Devis', icon: 'description', path: null, isOpen: false, subNavigationItems: [
+      { name: 'Devis', icon: 'description', path: '/quote' },
+      { name: 'Lignes de devis', icon: 'description', path: '/default-quote-line' },
+      { name: 'Générer un devis', icon: 'description', path: '/create-quote' },
+    ]},
     { name: 'Factures', icon: 'receipt', path: '/invoice' },
     { name: 'Clients', icon: 'people', path: '/customer' },
     { name: 'Mes informations', icon: 'receipt_long', path: '/information' },
