@@ -56,7 +56,8 @@ export class DefaultQuoteLinesComponent implements OnInit {
     this.isLoading = true;
     this.quoteService.getDefaultQuoteLines(page, limit).subscribe({
       next: (defaultQuoteLines) => {
-        this.defaultQuoteLines = defaultQuoteLines;
+        this.defaultQuoteLines = defaultQuoteLines.data;
+        this.meta = defaultQuoteLines.meta;
       },
       error: (error) => {
         this.notificationService.show('Erreur lors de la récupération des lignes de devis', 'error');
@@ -73,5 +74,6 @@ export class DefaultQuoteLinesComponent implements OnInit {
 
   addNewDefaultQuoteLine(defaultQuoteLine: DefaultQuoteLine): void {
     this.defaultQuoteLines.push(defaultQuoteLine);
+    this.notificationService.show('Ligne de devis ajoutée avec succès', 'success');
   }
 }

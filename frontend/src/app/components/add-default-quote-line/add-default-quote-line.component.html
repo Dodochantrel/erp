@@ -1,1 +1,31 @@
-<p>add-default-quote-line works!</p>
+<div class="pop-up-center">
+
+    <form [formGroup]="form" class="form">
+
+        <h2>Ajouté une ligne devis</h2>
+
+        <div class="row">
+
+            <p-floatLabel class="input">
+                <input pInputText id="description" formControlName="description" class="input"/>
+                <label for="description">Description</label>
+            </p-floatLabel>
+
+        </div>
+
+        <div class="row">
+
+            <p-floatLabel class="input">
+                <input pInputText id="price" formControlName="price" class="input" type="number"/>
+                <label for="price">Le prix</label>
+            </p-floatLabel>
+
+        </div>
+
+        <app-form-buttons class="buttons-form" (cancel)="quoteService.handleIsAddDefaultQuoteLine()" (save)="save()"></app-form-buttons>
+
+    </form>
+
+</div>
+
+<div class="background-pop-up-center"></div>

@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { DefaultQuoteLine } from '../default-quote-line.entity';
+import { PageQuery } from 'src/pagination/page-query';
+import { PaginatedResponse } from 'src/pagination/paginated-response';
 
 export class DefaultQuoteLineDto {
   @ApiProperty({
@@ -31,7 +33,14 @@ export class DefaultQuoteLineDto {
 }
 
 export const mapFromDefaultQuoteLineToDefaultQuoteLineDto = (
-  defaultQuoteLines: DefaultQuoteLine[],
-): DefaultQuoteLineDto[] => {
-  return defaultQuoteLines.map((defaultQuoteLine) => new DefaultQuoteLineDto(defaultQuoteLine));
+  defaultQuoteLines: PaginatedResponse<DefaultQuoteLine>,
+  pageQuery: PageQuery,
+): PaginatedResponse<DefaultQuoteLineDto> => {
+  const newPageQuery = new PageQuery(+pageQuery.page, +pageQuery.limit);
+  const paginatedDto = new PaginatedResponse<DefaultQuoteLineDto>(
+    defaultQuoteLines.data.map((defaultQuoteLine) => new DefaultQuoteLineDto(defaultQuoteLine)),
+    newPageQuery,
+    defaultQuoteLines.meta.itemCount,
+  );
+  return paginatedDto;
 };

@@ -12,7 +12,6 @@
 
         @if(!isLoading) {
             <p-table [value]="defaultQuoteLines" styleClass=" p-datatable-striped p-datatable-sm"
-                [tableStyle]="{ 'min-width': '50rem' }"
                 [scrollable]="true" 
                 scrollHeight="70vh" 
                 [virtualScroll]="true"
@@ -30,7 +29,7 @@
                     <tr>
                         <td>{{ customer.id }}</td>
                         <td>{{ customer.description }}</td>
-                        <td>{{ customer.price }}</td>
+                        <td>{{ customer.price }} €</td>
                     </tr>
 
                 </ng-template>

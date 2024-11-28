@@ -1,15 +1,23 @@
-import { Body, Controller, Delete, Get, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { QuoteService } from './quote.service';
 import { UserEmail } from 'src/user/user-email.decorator';
 import { DefaultQuoteLineDto, mapFromDefaultQuoteLineToDefaultQuoteLineDto } from './dto/default-quote-line.dto';
+import { PageQuery } from 'src/pagination/page-query';
+import { PaginatedResponse } from 'src/pagination/paginated-response';
 
 @Controller('quote')
 export class QuoteController {
   constructor(private readonly quoteService: QuoteService) {}
 
-  @Get('default-quote-lines')
-  async findAllType(@UserEmail() email: string): Promise<DefaultQuoteLineDto[]> {
-    return mapFromDefaultQuoteLineToDefaultQuoteLineDto(await this.quoteService.findAllDefaultQuoteLines(email));
+  @Get('default-quote-lines/search/:search')
+  async findAll(
+    @UserEmail() email: string,
+    @Query() pageQuery: PageQuery,
+    @Param('search') search: string,
+  ): Promise<PaginatedResponse<DefaultQuoteLineDto>> {
+    return this.quoteService
+      .findAllDefaultQuoteLines(email, +pageQuery.page, +pageQuery.limit, search)
+      .then((response) => mapFromDefaultQuoteLineToDefaultQuoteLineDto(response, pageQuery));
   }
 
   @Post('default-quote-lines')

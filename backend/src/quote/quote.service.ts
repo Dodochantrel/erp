@@ -6,6 +6,8 @@ import { QuoteLine } from './quote-line.entity';
 import { UserService } from 'src/user/user.service';
 import { User } from 'src/user/user.entity';
 import { AppError } from 'src/error/app-error.exception';
+import { PaginatedResponse } from 'src/pagination/paginated-response';
+import { PageQuery } from 'src/pagination/page-query';
 
 @Injectable()
 export class QuoteService {
@@ -19,8 +21,23 @@ export class QuoteService {
     private readonly userService: UserService,
   ) {}
 
-  findAllDefaultQuoteLines(email: string): Promise<DefaultQuoteLine[]> {
-    return this.defaultQuoteLineRepository.find({ where: { user: { email } } });
+  async findAllDefaultQuoteLines(
+    email: string,
+    page: number,
+    limit: number,
+    search: string,
+  ): Promise<PaginatedResponse<DefaultQuoteLine>> {
+    const [defaultQuoteLines, totalCount] = await this.defaultQuoteLineRepository.findAndCount({
+      where: {
+        user: { email },
+        description: search ? search : undefined,
+      },
+      skip: page * limit,
+      take: limit,
+      order: { id: 'ASC' },
+    });
+
+    return new PaginatedResponse<DefaultQuoteLine>(defaultQuoteLines, new PageQuery(page, limit), totalCount);
   }
 
   async createDefaultQuoteLine(email: string, description: string, unitPrice: number): Promise<DefaultQuoteLine> {
